@@ -20,6 +20,8 @@
 		8762485328F4AD4100E927E0 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762485228F4AD4100E927E0 /* Status.swift */; };
 		8762485528F4ADAE00E927E0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762485428F4ADAE00E927E0 /* LoginView.swift */; };
 		8762485728F4ADB400E927E0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762485628F4ADB400E927E0 /* LoginViewModel.swift */; };
+		8762D78428F5AB9A00D57988 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762D78328F5AB9A00D57988 /* StringExtension.swift */; };
+		877198FD28F59A4D00A7D685 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877198FC28F59A4D00A7D685 /* NetworkHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		8762485228F4AD4100E927E0 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		8762485428F4ADAE00E927E0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8762485628F4ADB400E927E0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		8762D78328F5AB9A00D57988 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		877198FC28F59A4D00A7D685 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +146,7 @@
 		8762483C28F44C7000E927E0 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				8762D78228F5AB8D00D57988 /* Extensions */,
 				8762483E28F44C7700E927E0 /* Models */,
 				8762483D28F44C7300E927E0 /* Utils */,
 			);
@@ -152,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				8762484328F482CC00E927E0 /* AuthenticationHelper.swift */,
+				877198FC28F59A4D00A7D685 /* NetworkHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -223,6 +229,14 @@
 			children = (
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		8762D78228F5AB8D00D57988 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8762D78328F5AB9A00D57988 /* StringExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,7 +369,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				877198FD28F59A4D00A7D685 /* NetworkHelper.swift in Sources */,
 				8762481728F449CB00E927E0 /* Persistence.swift in Sources */,
+				8762D78428F5AB9A00D57988 /* StringExtension.swift in Sources */,
 				8762484428F482CC00E927E0 /* AuthenticationHelper.swift in Sources */,
 				8762485328F4AD4100E927E0 /* Status.swift in Sources */,
 				8762481A28F449CB00E927E0 /* IOSSuperpoderesMarvel.xcdatamodeld in Sources */,

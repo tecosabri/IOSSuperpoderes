@@ -11,7 +11,7 @@ import SwiftUI
 struct LoginView: View {
     var body: some View {
         VStack {
-            Text(try! AuthenticationHelper.generateMD5() ?? "Nothing to show")
+            Text(try! AuthenticationHelper.generateMD5().md5Code ?? "Nothing to show")
         }
     }
 }

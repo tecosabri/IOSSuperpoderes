@@ -9,7 +9,7 @@ import Foundation
 import CryptoKit
 
 protocol AuthenticationHelperProtocol: AnyObject {
-    static func generateMD5() throws -> String?
+    static func generateMD5() throws -> (md5Code: String?, timeStamp: String)
 }
 
 class AuthenticationHelper: AuthenticationHelperProtocol {
@@ -17,7 +17,7 @@ class AuthenticationHelper: AuthenticationHelperProtocol {
     static private let privateKey = "106d4a90fd6df27742659f14d4c4a26015917214"
     static private let publicKey = "5ed7dc76b420bc84a2d4a15450c50f4a"
     
-    static func generateMD5() throws -> String? {
+    static func generateMD5() throws -> (md5Code: String?, timeStamp: String) {
         // Get a string that changes in a request by request basis as the current timestamp
         let date = Date()
         let format = DateFormatter()
@@ -28,12 +28,8 @@ class AuthenticationHelper: AuthenticationHelperProtocol {
         let md5OriginatorString = timestamp + privateKey + publicKey
         
         // Get the md5 code from the previous string
-        guard let data = md5OriginatorString.data(using: .utf8) else { return nil }
-        let md5Code = Insecure.MD5
-            .hash(data: data)
-            .map {String(format: "%02x", $0)}
-            .joined()
+        let md5Code = md5OriginatorString.MD5
         
-        return md5Code
+        return (md5Code, timestamp)
     }
 }
