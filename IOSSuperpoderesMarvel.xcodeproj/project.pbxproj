@@ -8,14 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		8762480E28F449CA00E927E0 /* IOSSuperpoderesMarvelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762480D28F449CA00E927E0 /* IOSSuperpoderesMarvelApp.swift */; };
-		8762481028F449CA00E927E0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762480F28F449CA00E927E0 /* ContentView.swift */; };
 		8762481228F449CB00E927E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8762481128F449CB00E927E0 /* Assets.xcassets */; };
 		8762481528F449CB00E927E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8762481428F449CB00E927E0 /* Preview Assets.xcassets */; };
 		8762481728F449CB00E927E0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762481628F449CB00E927E0 /* Persistence.swift */; };
 		8762481A28F449CB00E927E0 /* IOSSuperpoderesMarvel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8762481828F449CB00E927E0 /* IOSSuperpoderesMarvel.xcdatamodeld */; };
-		8762482428F449CC00E927E0 /* IOSSuperpoderesMarvelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762482328F449CC00E927E0 /* IOSSuperpoderesMarvelTests.swift */; };
+		8762482428F449CC00E927E0 /* AuthenticationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762482328F449CC00E927E0 /* AuthenticationHelperTests.swift */; };
 		8762482E28F449CC00E927E0 /* IOSSuperpoderesMarvelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762482D28F449CC00E927E0 /* IOSSuperpoderesMarvelUITests.swift */; };
 		8762483028F449CC00E927E0 /* IOSSuperpoderesMarvelUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762482F28F449CC00E927E0 /* IOSSuperpoderesMarvelUITestsLaunchTests.swift */; };
+		8762484428F482CC00E927E0 /* AuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762484328F482CC00E927E0 /* AuthenticationHelper.swift */; };
+		8762485128F4AC3300E927E0 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762485028F4AC3300E927E0 /* RootViewModel.swift */; };
+		8762485328F4AD4100E927E0 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762485228F4AD4100E927E0 /* Status.swift */; };
+		8762485528F4ADAE00E927E0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762485428F4ADAE00E927E0 /* LoginView.swift */; };
+		8762485728F4ADB400E927E0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762485628F4ADB400E927E0 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,16 +42,20 @@
 /* Begin PBXFileReference section */
 		8762480A28F449CA00E927E0 /* IOSSuperpoderesMarvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSSuperpoderesMarvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8762480D28F449CA00E927E0 /* IOSSuperpoderesMarvelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSSuperpoderesMarvelApp.swift; sourceTree = "<group>"; };
-		8762480F28F449CA00E927E0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8762481128F449CB00E927E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8762481428F449CB00E927E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8762481628F449CB00E927E0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		8762481928F449CB00E927E0 /* IOSSuperpoderesMarvel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IOSSuperpoderesMarvel.xcdatamodel; sourceTree = "<group>"; };
 		8762481F28F449CC00E927E0 /* IOSSuperpoderesMarvelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOSSuperpoderesMarvelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8762482328F449CC00E927E0 /* IOSSuperpoderesMarvelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSSuperpoderesMarvelTests.swift; sourceTree = "<group>"; };
+		8762482328F449CC00E927E0 /* AuthenticationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelperTests.swift; sourceTree = "<group>"; };
 		8762482928F449CC00E927E0 /* IOSSuperpoderesMarvelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOSSuperpoderesMarvelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8762482D28F449CC00E927E0 /* IOSSuperpoderesMarvelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSSuperpoderesMarvelUITests.swift; sourceTree = "<group>"; };
 		8762482F28F449CC00E927E0 /* IOSSuperpoderesMarvelUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSSuperpoderesMarvelUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8762484328F482CC00E927E0 /* AuthenticationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelper.swift; sourceTree = "<group>"; };
+		8762485028F4AC3300E927E0 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		8762485228F4AD4100E927E0 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		8762485428F4ADAE00E927E0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		8762485628F4ADB400E927E0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				8762480C28F449CA00E927E0 /* IOSSuperpoderesMarvel */,
-				8762482228F449CC00E927E0 /* IOSSuperpoderesMarvelTests */,
 				8762482C28F449CC00E927E0 /* IOSSuperpoderesMarvelUITests */,
+				8762482228F449CC00E927E0 /* IOSSuperpoderesMarvelTests */,
 				8762480B28F449CA00E927E0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,12 +106,10 @@
 		8762480C28F449CA00E927E0 /* IOSSuperpoderesMarvel */ = {
 			isa = PBXGroup;
 			children = (
+				8762484028F44C8C00E927E0 /* App */,
+				8762483C28F44C7000E927E0 /* Domain */,
+				8762483F28F44C7D00E927E0 /* UI */,
 				8762480D28F449CA00E927E0 /* IOSSuperpoderesMarvelApp.swift */,
-				8762480F28F449CA00E927E0 /* ContentView.swift */,
-				8762481128F449CB00E927E0 /* Assets.xcassets */,
-				8762481628F449CB00E927E0 /* Persistence.swift */,
-				8762481828F449CB00E927E0 /* IOSSuperpoderesMarvel.xcdatamodeld */,
-				8762481328F449CB00E927E0 /* Preview Content */,
 			);
 			path = IOSSuperpoderesMarvel;
 			sourceTree = "<group>";
@@ -119,7 +125,7 @@
 		8762482228F449CC00E927E0 /* IOSSuperpoderesMarvelTests */ = {
 			isa = PBXGroup;
 			children = (
-				8762482328F449CC00E927E0 /* IOSSuperpoderesMarvelTests.swift */,
+				8762482328F449CC00E927E0 /* AuthenticationHelperTests.swift */,
 			);
 			path = IOSSuperpoderesMarvelTests;
 			sourceTree = "<group>";
@@ -131,6 +137,92 @@
 				8762482F28F449CC00E927E0 /* IOSSuperpoderesMarvelUITestsLaunchTests.swift */,
 			);
 			path = IOSSuperpoderesMarvelUITests;
+			sourceTree = "<group>";
+		};
+		8762483C28F44C7000E927E0 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8762483E28F44C7700E927E0 /* Models */,
+				8762483D28F44C7300E927E0 /* Utils */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8762483D28F44C7300E927E0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8762484328F482CC00E927E0 /* AuthenticationHelper.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		8762483E28F44C7700E927E0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8762485228F4AD4100E927E0 /* Status.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8762483F28F44C7D00E927E0 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8762485028F4AC3300E927E0 /* RootViewModel.swift */,
+				8762484728F48E4700E927E0 /* Detail */,
+				8762484628F48E4100E927E0 /* Home */,
+				8762484528F48E3C00E927E0 /* Register */,
+				8762484228F44E0B00E927E0 /* Login */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		8762484028F44C8C00E927E0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8762484128F44CC900E927E0 /* Resources */,
+				8762481628F449CB00E927E0 /* Persistence.swift */,
+				8762481828F449CB00E927E0 /* IOSSuperpoderesMarvel.xcdatamodeld */,
+				8762481328F449CB00E927E0 /* Preview Content */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		8762484128F44CC900E927E0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8762481128F449CB00E927E0 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8762484228F44E0B00E927E0 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8762485428F4ADAE00E927E0 /* LoginView.swift */,
+				8762485628F4ADB400E927E0 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		8762484528F48E3C00E927E0 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		8762484628F48E4100E927E0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8762484728F48E4700E927E0 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,9 +356,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8762481728F449CB00E927E0 /* Persistence.swift in Sources */,
+				8762484428F482CC00E927E0 /* AuthenticationHelper.swift in Sources */,
+				8762485328F4AD4100E927E0 /* Status.swift in Sources */,
 				8762481A28F449CB00E927E0 /* IOSSuperpoderesMarvel.xcdatamodeld in Sources */,
-				8762481028F449CA00E927E0 /* ContentView.swift in Sources */,
+				8762485128F4AC3300E927E0 /* RootViewModel.swift in Sources */,
+				8762485528F4ADAE00E927E0 /* LoginView.swift in Sources */,
 				8762480E28F449CA00E927E0 /* IOSSuperpoderesMarvelApp.swift in Sources */,
+				8762485728F4ADB400E927E0 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8762482428F449CC00E927E0 /* IOSSuperpoderesMarvelTests.swift in Sources */,
+				8762482428F449CC00E927E0 /* AuthenticationHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,7 +520,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"IOSSuperpoderesMarvel/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"IOSSuperpoderesMarvel/App/Preview Content\"";
 				DEVELOPMENT_TEAM = 94HWZ76SXD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -453,7 +549,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"IOSSuperpoderesMarvel/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"IOSSuperpoderesMarvel/App/Preview Content\"";
 				DEVELOPMENT_TEAM = 94HWZ76SXD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
