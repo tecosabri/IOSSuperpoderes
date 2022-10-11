@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8752686028F5B1FF007A861D /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752685F28F5B1FF007A861D /* Character.swift */; };
+		8752686228F5DD65007A861D /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752686128F5DD65007A861D /* Thumbnail.swift */; };
+		8752686428F5DE75007A861D /* Serie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752686328F5DE75007A861D /* Serie.swift */; };
+		8752686628F5DF0C007A861D /* URLElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752686528F5DF0C007A861D /* URLElement.swift */; };
+		8752686828F5DF65007A861D /* CharactersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8752686728F5DF65007A861D /* CharactersViewModel.swift */; };
 		8762480E28F449CA00E927E0 /* IOSSuperpoderesMarvelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762480D28F449CA00E927E0 /* IOSSuperpoderesMarvelApp.swift */; };
 		8762481228F449CB00E927E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8762481128F449CB00E927E0 /* Assets.xcassets */; };
 		8762481528F449CB00E927E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8762481428F449CB00E927E0 /* Preview Assets.xcassets */; };
@@ -44,6 +48,10 @@
 
 /* Begin PBXFileReference section */
 		8752685F28F5B1FF007A861D /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		8752686128F5DD65007A861D /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
+		8752686328F5DE75007A861D /* Serie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serie.swift; sourceTree = "<group>"; };
+		8752686528F5DF0C007A861D /* URLElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLElement.swift; sourceTree = "<group>"; };
+		8752686728F5DF65007A861D /* CharactersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewModel.swift; sourceTree = "<group>"; };
 		8762480A28F449CA00E927E0 /* IOSSuperpoderesMarvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSSuperpoderesMarvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8762480D28F449CA00E927E0 /* IOSSuperpoderesMarvelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSSuperpoderesMarvelApp.swift; sourceTree = "<group>"; };
 		8762481128F449CB00E927E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -169,6 +177,9 @@
 			children = (
 				8762485228F4AD4100E927E0 /* Status.swift */,
 				8752685F28F5B1FF007A861D /* Character.swift */,
+				8752686128F5DD65007A861D /* Thumbnail.swift */,
+				8752686328F5DE75007A861D /* Serie.swift */,
+				8752686528F5DF0C007A861D /* URLElement.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -223,6 +234,7 @@
 		8762484628F48E4100E927E0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				8752686728F5DF65007A861D /* CharactersViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -374,10 +386,14 @@
 			files = (
 				877198FD28F59A4D00A7D685 /* NetworkHelper.swift in Sources */,
 				8762481728F449CB00E927E0 /* Persistence.swift in Sources */,
+				8752686228F5DD65007A861D /* Thumbnail.swift in Sources */,
 				8752686028F5B1FF007A861D /* Character.swift in Sources */,
+				8752686628F5DF0C007A861D /* URLElement.swift in Sources */,
+				8752686428F5DE75007A861D /* Serie.swift in Sources */,
 				8762D78428F5AB9A00D57988 /* StringExtension.swift in Sources */,
 				8762484428F482CC00E927E0 /* AuthenticationHelper.swift in Sources */,
 				8762485328F4AD4100E927E0 /* Status.swift in Sources */,
+				8752686828F5DF65007A861D /* CharactersViewModel.swift in Sources */,
 				8762481A28F449CB00E927E0 /* IOSSuperpoderesMarvel.xcdatamodeld in Sources */,
 				8762485128F4AC3300E927E0 /* RootViewModel.swift in Sources */,
 				8762485528F4ADAE00E927E0 /* LoginView.swift in Sources */,
