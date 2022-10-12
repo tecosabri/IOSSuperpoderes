@@ -17,7 +17,7 @@ struct CharactersView: View {
                 if let characters = charactersViewModel.characters {
                     ForEach(characters) { character in
                         NavigationLink {
-                            // TODO: Charater detail
+                            SeriesView(seriesViewModel: SeriesViewModel(fromCharacter: character), charactersViewModel: charactersViewModel)
                         } label: {
                             HStack{ // Center view
                                 Spacer()
@@ -29,6 +29,7 @@ struct CharactersView: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
         }
     }
 }

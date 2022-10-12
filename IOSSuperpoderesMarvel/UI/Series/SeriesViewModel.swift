@@ -21,7 +21,7 @@ final class SeriesViewModel: ObservableObject {
     
     private let character: Character
     
-    init(fromCharacter character: Character) {
+    init(withUITesting testing: Bool = false, fromCharacter character: Character) {
         self.character = character
         getSeries()
     }
@@ -62,6 +62,32 @@ final class SeriesViewModel: ObservableObject {
                 self.series = data.data.results
             }
             .store(in: &suscriptors)
-
+    }
+    
+    // MARK: - UITesting functions
+    func getSeriesTesting() {
+        
+        let aPlusX = Serie(
+            id: 16450,
+            title: "A+X (2012 - 2014)",
+            description: "Get ready for action-packed stories featuring team-ups from your favorite Marvel heroes every month! First, a story where Wolverine and Hulk come together, and then Captain America and Cable meet up! But will each partner's combined strength be enough?",
+            thumbnail: Thumbnail(path: "http://i.annihil.us/u/prod/marvel/i/mg/5/d0/511e88a20ae34"))
+        
+        let newXMen = Serie(
+            id: 16449,
+            title: "All-New X-Men (2012 - 2015)",
+            description: "In the wake of the events of Avengers Vs. X-Men, the mutant world is set to receive a big blast from the past, in the form of the original X-Men! How will the young, unsuspecting mutants from the past - including Jean Grey - react to the conflict and turmoil that has engulfed the world of their future?",
+            thumbnail: Thumbnail(path: "http://i.annihil.us/u/prod/marvel/i/mg/c/60/5384e7d05aaee"))
+        
+        let newWolverine = Serie(
+            id: 22728,
+            title: "All-New Wolverine Vol. 5: Orphans of X (2018)",
+            description: "Daken has been kidnapped, and it's up to Wolverine to find him. But when his trail brings her back to the Facility, the place that tortured and created her, what new horrors will Laura find cooking there? Who, exactly, are the Orphans of X? How are they connected to the Wolverine? And what do they know about Laura and her past?",
+            thumbnail: Thumbnail(path: "https://i.annihil.us/u/prod/marvel/i/mg/3/b0/5a84b58724b37/clean.jpg"))
+        
+        
+        let wolverineSeries = [aPlusX, newXMen, newWolverine]
+        
+        self.series = wolverineSeries
     }
 }

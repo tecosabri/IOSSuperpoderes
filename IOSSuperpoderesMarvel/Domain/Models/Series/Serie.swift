@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Serie: Codable {
+struct Serie: Codable, Identifiable { 
     let id: Int
     let title: String
     let description: String?

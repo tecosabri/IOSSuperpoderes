@@ -20,7 +20,7 @@ final class CharactersViewModel: ObservableObject {
     private var suscriptors = Set<AnyCancellable>()
     
     init(withUITesting testing: Bool = false) {
-        testing ? getCharacttersTesting() : getCharacters()
+        testing ? getCharactersTesting() : getCharacters()
     }
     
     private func cancellAllSuscriptors() {
@@ -64,7 +64,7 @@ final class CharactersViewModel: ObservableObject {
     }
     
     // MARK: - UITesting functions
-    func getCharacttersTesting() {
+    func getCharactersTesting() {
         
         let wolverine = Character(
             id: 1009718,
