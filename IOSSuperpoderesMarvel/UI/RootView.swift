@@ -14,7 +14,7 @@ struct RootView: View {
     var body: some View {
         switch rootViewModel.status {
         default:
-            LoginView(charactersViewModel: CharactersViewModel())
+            CharactersView(charactersViewModel: CharactersViewModel())
         }
     }
 }
