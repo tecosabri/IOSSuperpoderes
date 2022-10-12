@@ -8,10 +8,10 @@
 import Foundation
 
 
-struct Welcome: Codable {
-    let data: DataClass
+struct CharactersDataWrapper: Codable {
+    let data: CharactersDataContainer
 }
 
-struct DataClass: Codable {
+struct CharactersDataContainer: Codable {
     let results: [Character]
 }

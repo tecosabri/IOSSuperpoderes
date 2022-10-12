@@ -19,7 +19,7 @@ struct HTTPMethods {
 
 enum EndPoint: String {
     case characters = "/v1/public/characters"
-    case series = "/v1/public/characters/{characterId}/series"
+    case series = "/v1/public/characters/characterID/series"
 }
 
 enum ParameterName: String {
@@ -49,12 +49,13 @@ struct Parameter {
 }
 
 protocol NetworkHelperProtocol: AnyObject {
-    // TODO: Testing this protocol requires to workaround the default value of getSessionCharacters function
+    static func getSessionCharacters(filter: [Parameter]?) -> URLRequest?
+    static func generateFilterUsing(name: String?, nameStartsWith: String?, appearsInSerie: String?, resultsLimit: Int?, skipResults: Int?, order: Order?) -> [Parameter]
 }
 
 final class NetworkHelper: NetworkHelperProtocol {
     
-    static func getSessionCharacters(filter: [Parameter]? = nil) -> URLRequest? {
+    static func getSessionCharacters(filter: [Parameter]?) -> URLRequest? {
         let stringURL = generateMarvelAPIUrl(fromEndPoint: .characters, andParameters: filter)
         guard let url = URL(string: stringURL) else { return nil }
        
@@ -65,13 +66,25 @@ final class NetworkHelper: NetworkHelperProtocol {
         return request
     }
     
+    static func getSessionSeries(forCharacter character: Character) -> URLRequest? {
+        var stringURL = generateMarvelAPIUrl(fromEndPoint: .series, andParameters: nil)
+        stringURL = stringURL.replacingOccurrences(of: "characterID", with: String(character.id))
+        guard let url = URL(string: stringURL) else { return nil }
+       
+        // Get the URL reques and add body if needed
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethods.get
+        
+        return request
+    }
+    
     static func generateFilterUsing(
-        name: String? = nil,
-        nameStartsWith: String? = nil,
-        appearsInSerie: String? = nil,
-        resultsLimit: Int? = nil,
-        skipResults: Int? = nil,
-        order: Order? = nil) -> [Parameter] {
+        name: String?,
+        nameStartsWith: String?,
+        appearsInSerie: String?,
+        resultsLimit: Int?,
+        skipResults: Int?,
+        order: Order?) -> [Parameter] {
             var parameterList: [Parameter] = []
             // Adds parameters to the list depending on selected values for filter
             if let name { parameterList.append(Parameter(parameterName: .name, value: name))}
@@ -109,8 +122,8 @@ final class NetworkHelper: NetworkHelperProtocol {
     
         stringURL.removeLast() // Last & has to be removed from the string
         stringURL = stringURL.components(separatedBy: .newlines).joined() // Delete newlines created by multiline and interpolation
-        guard let stringURL = stringURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return "" } // Timestamp has spaces: it's needed to tell that to URL(string:)
-        
+        guard let stringURL = stringURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return "" } // Timestamp has spaces: it's needed to notify to URL(string:)
+    
         return stringURL
     }
     
