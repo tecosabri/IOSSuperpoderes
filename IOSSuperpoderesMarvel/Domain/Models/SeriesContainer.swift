@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Serie: Codable {
+struct SeriesContainer: Codable {
     let available: Int
     let collectionURI: String
     let items: [SeriesItem]

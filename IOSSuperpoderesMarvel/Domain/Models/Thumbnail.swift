@@ -16,3 +16,10 @@ struct Thumbnail: Codable {
         self.path += ".jpg"
     }
 }
+
+extension Thumbnail {
+    
+    init(path: String) {
+        self.path = path
+    }
+}

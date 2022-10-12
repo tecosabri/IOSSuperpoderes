@@ -7,16 +7,11 @@
 
 import Foundation
 
-struct CharacterFilter: Encodable {
-    let filter: String
-}
-
 struct Character: Codable, Identifiable {
     let id: Int
     let name, description: String
     let modified: String
     let thumbnail: Thumbnail
     let resourceURI: String
-    let series: Serie
-//    let urls: [URLElement]
+    let series: SeriesContainer
 }
