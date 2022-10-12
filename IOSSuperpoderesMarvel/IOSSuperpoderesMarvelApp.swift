@@ -9,11 +9,14 @@ import SwiftUI
 
 @main
 struct IOSSuperpoderesMarvelApp: App {
+    
+    @StateObject var rootViewModel = RootViewModel()
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            RootView()
+                .environmentObject(rootViewModel)
         }
     }
 }

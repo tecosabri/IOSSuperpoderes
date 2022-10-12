@@ -9,16 +9,35 @@ import Foundation
 import SwiftUI
 
 struct LoginView: View {
+    
+    @StateObject var charactersViewModel: CharactersViewModel
+    
     var body: some View {
         VStack {
-            Text(try! AuthenticationHelper.generateMD5().md5Code ?? "Nothing to show")
+            if let characters = charactersViewModel.characters {
+                let url = URL(string: characters[1].thumbnail.path)
+                AsyncImage(url: url) { image in
+                    image
+                        .resizable()
+                        .frame(height: 300)
+                } placeholder: {
+                    Image(systemName: "photo")
+                        .resizable()
+                        .frame(height: 300)
+                }
+                Text(characters[1].name)
+            }
         }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(charactersViewModel: CharactersViewModel())
+            .environment(\.locale, .init(identifier: "es"))
+
+        LoginView(charactersViewModel: CharactersViewModel())
+            .environment(\.locale, .init(identifier: "en"))
     }
 }
 

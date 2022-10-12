@@ -7,32 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F539965C-A9A8-458D-9C4F-6171501B1972"
+            uuid = "82718240-8002-4C9C-A528-A81C6F57EA67"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "IOSSuperpoderesMarvel/UI/Login/LoginView.swift"
+            filePath = "IOSSuperpoderesMarvel/UI/Home/CharactersViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "getCharacters(withFilter:inOrder:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "236813B3-6B02-4886-A85E-5AC769A0C697"
+            uuid = "37E4B785-0AD3-42C6-A0FD-CDDF4B12BC80"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "IOSSuperpoderesMarvel/Domain/Utils/AuthenticationHelper.swift"
+            filePath = "IOSSuperpoderesMarvel/Domain/Utils/NetworkHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "generateMD5()"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "getSessionCharacters(filter:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

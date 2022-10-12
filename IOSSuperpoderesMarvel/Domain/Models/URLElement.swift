@@ -12,8 +12,8 @@ struct URLElement: Codable {
     let url: String
 }
 
-enum URLType: String, Codable {
-    case comiclink = "comiclink"
-    case detail = "detail"
-    case wiki = "wiki"
+struct URLType: Codable {
+    let comiclink: String
+    let detail: String
+    let wiki: String
 }

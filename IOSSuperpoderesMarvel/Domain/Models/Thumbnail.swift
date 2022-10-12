@@ -7,18 +7,12 @@
 
 import Foundation
 
-enum Extension: String, Codable {
-    case jpg = "jpg"
-}
-
 struct Thumbnail: Codable {
-    let path: String
-    let thumbnailExtension: Extension
-
-    enum CodingKeys: String, CodingKey {
-        case path
-        case thumbnailExtension = "extension"
+    var path: String
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.path = try container.decode(String.self, forKey: .path)
+        self.path += ".jpg"
     }
 }
-
-

@@ -11,19 +11,12 @@ struct CharacterFilter: Encodable {
     let filter: String
 }
 
-struct Character: Codable {
+struct Character: Codable, Identifiable {
     let id: Int
-    let name, resultDescription: String
-    let modified: Date
+    let name, description: String
+    let modified: String
     let thumbnail: Thumbnail
     let resourceURI: String
-    let series: [Serie]
-    let urls: [URLElement]
-    
-
-    enum CodingKeys: String, CodingKey {
-        case id, name
-        case resultDescription = "description"
-        case modified, thumbnail, resourceURI, series, urls
-    }
+    let series: Serie
+//    let urls: [URLElement]
 }

@@ -17,15 +17,22 @@ struct HTTPMethods {
     static let delete = "DELETE"
 }
 
-enum EndPoints: String {
+enum EndPoint: String {
     case characters = "/v1/public/characters"
     case series = "/v1/public/characters/{characterId}/series"
 }
 
-enum Parameters: String {
+enum ParameterName: String {
+    // Authentication parameters
     case apikey = "apikey"
     case timestamp = "ts"
     case md5 = "hash"
+    // Other parameters
+    case name = "name"
+    case nameStartsWith = "nameStartsWith"
+    case appearsInSeries = "series"
+    case resultsLimit = "limit"
+    case skipResults = "offset"
     case order = "orderBy"
 }
 
@@ -36,33 +43,75 @@ enum Order: String {
     case modifiedDescending = "-modified"
 }
 
-protocol NetworkHelperProtocol: AnyObject {
-    
+struct Parameter {
+    let parameterName: ParameterName
+    let value: String
 }
 
-class NetworkHelper: NetworkHelperProtocol {
+protocol NetworkHelperProtocol: AnyObject {
+    // TODO: Testing this protocol requires to workaround the default value of getSessionCharacters function
+}
+
+final class NetworkHelper: NetworkHelperProtocol {
     
-    func getSessionCharacters(filter: String = "", inOrder order: Order) -> URLRequest? {
-        // Get the URL with server + endpoint for characters + apikey + timestamp + md5 + order
-        guard let authentication = try? AuthenticationHelper.generateMD5(),
-              let md5Code = authentication.md5Code else { return nil }
-        let stringURL = """
-            \(server)\(EndPoints.characters.rawValue)?
-            \(Parameters.apikey.rawValue)=\(AuthenticationHelper.publicKey)&
-            \(Parameters.timestamp.rawValue)=\(authentication.timeStamp)&
-            \(Parameters.md5.rawValue)=\(md5Code)&
-            \(Parameters.order.rawValue)=\(order.rawValue)
-            """
+    static func getSessionCharacters(filter: [Parameter]? = nil) -> URLRequest? {
+        let stringURL = generateMarvelAPIUrl(fromEndPoint: .characters, andParameters: filter)
         guard let url = URL(string: stringURL) else { return nil }
-        
+       
         // Get the URL reques and add body if needed
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethods.get
-        if filter.count != 0 {
-            request.httpBody = try? JSONEncoder().encode(CharacterFilter(filter: filter))
-        }
         
         return request
+    }
+    
+    static func generateFilterUsing(
+        name: String? = nil,
+        nameStartsWith: String? = nil,
+        appearsInSerie: String? = nil,
+        resultsLimit: Int? = nil,
+        skipResults: Int? = nil,
+        order: Order? = nil) -> [Parameter] {
+            var parameterList: [Parameter] = []
+            // Adds parameters to the list depending on selected values for filter
+            if let name { parameterList.append(Parameter(parameterName: .name, value: name))}
+            if let nameStartsWith { parameterList.append(Parameter(parameterName: .nameStartsWith, value: nameStartsWith))}
+            if let appearsInSerie { parameterList.append(Parameter(parameterName: .appearsInSeries, value: appearsInSerie))}
+            if let resultsLimit { parameterList.append(Parameter(parameterName: .resultsLimit, value: String(resultsLimit)))}
+            if let skipResults { parameterList.append(Parameter(parameterName: .skipResults, value: String(skipResults)))}
+            if let order { parameterList.append(Parameter(parameterName: .order, value: order.rawValue))}
+            
+            return parameterList
+        }
+    
+    
+    private static func generateMarvelAPIUrl(fromEndPoint endPoint: EndPoint, andParameters parameters: [Parameter]?) -> String {
+        // Create authentication parameters
+        guard let authentication = try? AuthenticationHelper.generateMD5(),
+              let md5Code = authentication.md5Code else { return "" }
+        let keyParam = Parameter(parameterName: .apikey, value: AuthenticationHelper.publicKey)
+        let tsParam = Parameter(parameterName: .timestamp, value: authentication.timeStamp)
+        let md5Param = Parameter(parameterName: .md5, value: md5Code)
+        // Add authentication parameters to parameters array
+        var parametersCopy = [keyParam, tsParam, md5Param]
+        parameters?.forEach { parameter in
+            parametersCopy.append(parameter)
+        }
+      
+        // Create string from server + endpoint + parameters
+        var stringURL = "\(server)\(endPoint.rawValue)?"
+        parametersCopy.forEach { parameter in
+            stringURL.append(parameter.parameterName.rawValue)
+            stringURL.append("=")
+            stringURL.append(parameter.value)
+            stringURL.append("&")
+        }
+    
+        stringURL.removeLast() // Last & has to be removed from the string
+        stringURL = stringURL.components(separatedBy: .newlines).joined() // Delete newlines created by multiline and interpolation
+        guard let stringURL = stringURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return "" } // Timestamp has spaces: it's needed to tell that to URL(string:)
+        
+        return stringURL
     }
     
 }
