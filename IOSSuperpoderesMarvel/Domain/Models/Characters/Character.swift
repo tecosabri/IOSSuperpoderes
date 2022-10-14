@@ -11,7 +11,7 @@ struct Character: Codable, Identifiable {
     let id: Int
     let name, description: String
     let modified: String
-    let thumbnail: Thumbnail
+    var thumbnail: Thumbnail
     let resourceURI: String
     let series: SeriesContainer
 }

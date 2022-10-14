@@ -20,9 +20,16 @@ struct SerieRowView: View {
                     .scaledToFill()
                     
             } placeholder: {
-                Image(systemName: "square.fill")
-                    .resizable()
-                    .scaledToFill()
+                ZStack {
+                    Rectangle()
+                        .fill(.white)
+                        .border(.gray, width: 4)
+                        .scaledToFill()
+                        .opacity(1)
+                    Image(systemName: "photo")
+                        .opacity(0.8)
+                        .scaledToFill()
+                }
             }
         }
     }
