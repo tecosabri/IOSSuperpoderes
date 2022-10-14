@@ -8,18 +8,18 @@
 import Foundation
 import Combine
 
-protocol SeriesViewModelProtocol: AnyObject {
+protocol CharacterViewModelProtocol: AnyObject {
     
 }
 
-final class SeriesViewModel: ObservableObject {
+final class CharacterViewModel: ObservableObject {
     
     @Published var series: [Serie]?
-    @Published var status = Status.none
+    @Published var status = SceneStatus.none
     
     private var suscriptors = Set<AnyCancellable>()
     
-    private let character: Character
+    var character: Character
     
     init(withUITesting testing: Bool = false, fromCharacter character: Character) {
         self.character = character

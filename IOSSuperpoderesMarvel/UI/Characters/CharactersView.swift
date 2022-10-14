@@ -9,27 +9,29 @@ import SwiftUI
 
 struct CharactersView: View {
     
-    @StateObject var charactersViewModel: CharactersViewModel
+    @ObservedObject var charactersViewModel: CharactersViewModel
     
     var body: some View {
-        NavigationStack {
-            List {
-                if let characters = charactersViewModel.characters {
-                    ForEach(characters) { character in
-                        NavigationLink {
-                            SeriesView(seriesViewModel: SeriesViewModel(fromCharacter: character), charactersViewModel: charactersViewModel)
-                        } label: {
-                            HStack{ // Center view
-                                Spacer()
-                                CharacterRowView(character: character)
-                                Spacer()
+        if(charactersViewModel.status == .loaded) {
+            NavigationStack {
+                List {
+                    if let characters = charactersViewModel.characters {
+                        ForEach(characters, id: \.character.id) { characterViewModel in
+                            NavigationLink {
+                                CharacterDetail(characterViewModel: characterViewModel)
+                            } label: {
+                                HStack{ // Center view
+                                    Spacer()
+                                    CharacterRowView(characterViewModel: characterViewModel)
+                                    Spacer()
+                                }
                             }
+                            .listRowSeparator(.hidden) // Hides separator between characters
                         }
-                        .listRowSeparator(.hidden) // Hides separator between characters
                     }
                 }
+                .scrollContentBackground(.hidden)
             }
-            .scrollContentBackground(.hidden)
         }
     }
 }

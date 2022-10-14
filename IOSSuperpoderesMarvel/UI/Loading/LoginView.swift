@@ -8,21 +8,21 @@
 import Foundation
 import SwiftUI
 
-struct LoginView: View {
+struct LoadingView: View {
         
     var body: some View {
         VStack {
-            
+            Text("Loading")
         }
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct LoadingView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoadingView()
             .environment(\.locale, .init(identifier: "es"))
 
-        LoginView()
+        LoadingView()
             .environment(\.locale, .init(identifier: "en"))
     }
 }

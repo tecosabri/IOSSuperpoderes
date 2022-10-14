@@ -1,48 +1,43 @@
 //
-//  CharacterRowView.swift
+//  CharacterDetail.swift
 //  IOSSuperpoderesMarvel
 //
-//  Created by Ismael Sabri Pérez on 12/10/22.
+//  Created by Ismael Sabri Pérez on 14/10/22.
 //
 
 import SwiftUI
 
-struct CharacterRowView: View {
+struct CharacterDetail: View {
     
-    @ObservedObject var characterViewModel: CharacterViewModel
-
+    var characterViewModel: CharacterViewModel
     
     var body: some View {
         
         VStack {
-            // Photo
-            ZStackLayout(alignment: .top) {
-                let imageURL = URL(string: characterViewModel.character.thumbnail.path)
+            
+            if let stringImage = characterViewModel.character.thumbnail.portraitIncredible {
+                let url = URL(string: stringImage)
                 
-                Text(characterViewModel.character.name)
-                    .frame(width: 220, height: 80, alignment: .top)
-                    .lineLimit(2)
-                    .font(.title3)
-                    .foregroundColor(.white)
-                    .padding(5)
-                    .zIndex(1)
-                
-                AsyncImage(url: imageURL) { image in
-                    ZStack {
+                AsyncImage(url: url) { image in
+                    ZStack(alignment: .top) {
+                        
+                        Text(characterViewModel.character.name)
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .zIndex(1)
+                            .padding()
+                        
                         image
                             .resizable()
-                            .frame(width: 250, height: 250)
-                        
                         Rectangle()
                             .fill(LinearGradient(colors: [.black, .white], startPoint: .top, endPoint: .center))
+                            .frame(width: UIScreen.screenWidth)
                             .opacity(0.3)
-                            .frame(width: 250, height: 250)
                     }
                 } placeholder: {
                     ZStack {
                         Rectangle()
                             .fill(.white)
-                            .frame(width: 250, height: 250)
                             .border(.gray, width: 4)
                             .scaledToFill()
                             .opacity(1)
@@ -51,18 +46,30 @@ struct CharacterRowView: View {
                             .scaledToFill()
                     }
                 }
-                
-
             }
-
+            
+            ScrollView(.horizontal){
+                HStack {
+                    if let series = characterViewModel.series {
+                        ForEach(series) { serie in
+                            NavigationLink {
+                                SerieDetailView(serie: serie)
+                            } label: {
+                                SerieRowView(serie: serie)
+                            }
+                        }
+                    }
+                }
+            }
+            .frame(width: UIScreen.screenWidth, height: 150)
         }
     }
 }
 
-struct CharacterRowView_Previews: PreviewProvider {
+struct CharacterDetail_Previews: PreviewProvider {
     static var previews: some View {
         
-        let captainAmerica = Character(
+        var captainAmerica = Character(
             id: 1009220,
             name: "Captain America",
             description: "Vowing to serve his country any way he could, young Steve Rogers took the super soldier serum to become America's one-man army. Fighting for the red, white and blue for over 60 years, Captain America is the living, breathing symbol of freedom and liberty.",
@@ -80,8 +87,10 @@ struct CharacterRowView_Previews: PreviewProvider {
                         resourceURI: "http://gateway.marvel.com/v1/public/series/3620",
                         name: "A-Next (1998 - 1999)")],
                 returned: 2))
+        captainAmerica.thumbnail.portraitIncredible = "http://i.annihil.us/u/prod/marvel/i/mg/3/50/537ba56d31087/portrait_incredible.jpg"
         
-        CharacterRowView(characterViewModel: CharacterViewModel(fromCharacter: captainAmerica))
-        
+        return CharacterDetail(characterViewModel: CharacterViewModel(fromCharacter: captainAmerica))
     }
 }
+
+
