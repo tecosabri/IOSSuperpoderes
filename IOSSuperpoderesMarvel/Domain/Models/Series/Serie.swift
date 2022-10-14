@@ -11,5 +11,5 @@ struct Serie: Codable, Identifiable {
     let id: Int
     let title: String
     let description: String?
-    let thumbnail: Thumbnail
+    var thumbnail: Thumbnail
 }

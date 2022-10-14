@@ -9,11 +9,13 @@ import Foundation
 
 struct Thumbnail: Codable {
     var path: String
+    var portraitIncredible: String?
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.path = try container.decode(String.self, forKey: .path)
-        self.path += ".jpg"
+        self.portraitIncredible = self.path + "/portrait_incredible.jpg"
+        self.path += "/standard_xlarge.jpg"
     }
 }
 

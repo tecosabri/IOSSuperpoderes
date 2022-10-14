@@ -14,8 +14,8 @@ protocol CharactersViewModelProtocol: AnyObject {
 
 final class CharactersViewModel: ObservableObject {
     
-    @Published var characters: [Character]?
-    @Published var status = Status.none
+    @Published var characters: [CharacterViewModel]? = []
+    @Published var status = SceneStatus.none
     
     private var suscriptors = Set<AnyCancellable>()
     
@@ -28,6 +28,8 @@ final class CharactersViewModel: ObservableObject {
     }
     
     func getCharacters(filter: [Parameter]? = nil) {
+        
+        status = .loading
         // Cancels every suscriptor that is not being used
         cancellAllSuscriptors()
         
@@ -56,9 +58,9 @@ final class CharactersViewModel: ObservableObject {
                     self.status = .error(error: "Error loading characters")
                 }
             } receiveValue: { data in
-                self.characters  = data.data.results
-                guard let characters = self.characters else { return }
-                characters.forEach { print($0.series.items.first?.resourceURI ?? "\($0.name) has no serie?")}
+                let apiCharactersResponse = data.data.results
+                apiCharactersResponse.forEach { self.characters?.append(CharacterViewModel(fromCharacter: $0)) }
+                print("received value")
             }
             .store(in: &suscriptors)
     }
@@ -142,7 +144,10 @@ final class CharactersViewModel: ObservableObject {
                         name: "Age of Heroes (2010)")],
                 returned: 2))
         
-        self.characters = [wolverine, captainAmerica, blackWidow, thor]
+        self.characters = [CharacterViewModel(fromCharacter: wolverine),
+                           CharacterViewModel(fromCharacter: captainAmerica),
+                           CharacterViewModel(fromCharacter: blackWidow),
+                           CharacterViewModel(fromCharacter: thor)]
     }
 }
 

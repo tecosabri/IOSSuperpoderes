@@ -11,6 +11,6 @@ import Combine
 
 final class RootViewModel: ObservableObject {
     
-    @Published var status = Status.none
+    @Published var status = SceneStatus.none
     
 }
