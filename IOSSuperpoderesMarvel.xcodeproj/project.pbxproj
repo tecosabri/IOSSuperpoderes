@@ -37,6 +37,8 @@
 		879D43EB28F7613F00E4FB10 /* SerieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879D43EA28F7613F00E4FB10 /* SerieDetailView.swift */; };
 		879D43ED28F767C100E4FB10 /* SerieRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879D43EC28F767C100E4FB10 /* SerieRowView.swift */; };
 		87C1929B28F9A69A00551788 /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C1929A28F9A69A00551788 /* CharacterDetailView.swift */; };
+		87C192A228F9FF7F00551788 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C192A128F9FF7F00551788 /* ImageLoader.swift */; };
+		87C192A528FA0C4900551788 /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C192A328FA067100551788 /* CachedAsyncImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		879D43EA28F7613F00E4FB10 /* SerieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieDetailView.swift; sourceTree = "<group>"; };
 		879D43EC28F767C100E4FB10 /* SerieRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieRowView.swift; sourceTree = "<group>"; };
 		87C1929A28F9A69A00551788 /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
+		87C192A128F9FF7F00551788 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		87C192A328FA067100551788 /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +195,7 @@
 			children = (
 				8762484328F482CC00E927E0 /* AuthenticationHelper.swift */,
 				877198FC28F59A4D00A7D685 /* NetworkHelper.swift */,
+				87C192A128F9FF7F00551788 /* ImageLoader.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 				87C1929A28F9A69A00551788 /* CharacterDetailView.swift */,
 				879D43EA28F7613F00E4FB10 /* SerieDetailView.swift */,
 				879D43EC28F767C100E4FB10 /* SerieRowView.swift */,
+				87C192A328FA067100551788 /* CachedAsyncImage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -433,9 +439,11 @@
 				8752686428F5DE75007A861D /* SeriesContainer.swift in Sources */,
 				8762D78428F5AB9A00D57988 /* StringExtension.swift in Sources */,
 				8762484428F482CC00E927E0 /* AuthenticationHelper.swift in Sources */,
+				87C192A528FA0C4900551788 /* CachedAsyncImage.swift in Sources */,
 				879D43D628F6B49600E4FB10 /* RootView.swift in Sources */,
 				879D43E928F7413A00E4FB10 /* CharacterRowView.swift in Sources */,
 				8762485328F4AD4100E927E0 /* SceneStatus.swift in Sources */,
+				87C192A228F9FF7F00551788 /* ImageLoader.swift in Sources */,
 				879D43D828F6C30B00E4FB10 /* CharactersWrappers.swift in Sources */,
 				8752686828F5DF65007A861D /* CharactersViewModel.swift in Sources */,
 				879D43DE28F71B6D00E4FB10 /* Serie.swift in Sources */,

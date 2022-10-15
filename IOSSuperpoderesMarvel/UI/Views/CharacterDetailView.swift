@@ -16,17 +16,18 @@ struct CharacterDetail: View {
         VStack {
             
             if let stringImage = characterViewModel.character.thumbnail.portraitIncredible {
+    
                 let url = URL(string: stringImage)
                 
                 AsyncImage(url: url) { image in
                     ZStack(alignment: .top) {
-                        
+
                         Text(characterViewModel.character.name)
                             .font(.title)
                             .foregroundColor(.white)
                             .zIndex(1)
                             .padding()
-                        
+
                         image
                             .resizable()
                         Rectangle()
