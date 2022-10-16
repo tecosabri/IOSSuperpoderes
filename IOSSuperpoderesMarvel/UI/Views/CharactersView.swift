@@ -11,11 +11,18 @@ struct CharactersView: View {
     
     @ObservedObject var charactersViewModel: CharactersViewModel
     
+    @State private var searchBarText: String = ""
+    
+    private var characters: [CharacterViewModel]? {
+        if searchBarText.isEmpty { return charactersViewModel.characters }
+        return charactersViewModel.characters?.filter { $0.character.name.localizedCaseInsensitiveContains(searchBarText) }
+    }
+    
     var body: some View {
         if(charactersViewModel.status == .loaded) {
             NavigationStack {
                 List {
-                    if let characters = charactersViewModel.characters {
+                    if let characters {
                         ForEach(characters, id: \.character.id) { characterViewModel in
                             NavigationLink {
                                 CharacterDetail(characterViewModel: characterViewModel)
@@ -31,6 +38,10 @@ struct CharactersView: View {
                     }
                 }
                 .scrollContentBackground(.hidden)
+                .navigationTitle("Marvel heros")
+                .searchable(text: $searchBarText, prompt: "Search your hero")
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(TextInputAutocapitalization.never)
             }
         }
     }
@@ -39,6 +50,6 @@ struct CharactersView: View {
 struct CharactersView_Previews: PreviewProvider {
     static var previews: some View {
         CharactersView(charactersViewModel: CharactersViewModel(withUITesting: true))
-            .environment(\.locale, .init(identifier: "es"))
+            .environment(\.locale, .init(identifier: "en"))
     }
 }

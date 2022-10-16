@@ -17,7 +17,6 @@ struct CharacterRowView: View {
         VStack {
             // Photo
             ZStackLayout(alignment: .top) {
-                //                let imageURL = URL(string: characterViewModel.character.thumbnail.path)
                 
                 Text(characterViewModel.character.name)
                     .frame(width: 250, height: 80, alignment: .top)
@@ -25,6 +24,8 @@ struct CharacterRowView: View {
                     .font(.title3)
                     .foregroundColor(.white)
                     .padding(5)
+                    .bold()
+                    .shadow(radius: 50)
                     .zIndex(1)
                 
                 if let image = characterViewModel.image {
@@ -52,7 +53,6 @@ struct CharacterRowView_Previews: PreviewProvider {
             description: "Vowing to serve his country any way he could, young Steve Rogers took the super soldier serum to become America's one-man army. Fighting for the red, white and blue for over 60 years, Captain America is the living, breathing symbol of freedom and liberty.",
             modified: "2020-04-04T19:01:59-0400",
             thumbnail: Thumbnail(path: "http://i.annihil.us/u/prod/marvel/i/mg/3/50/537ba56d31087.jpg"),
-            resourceURI: "http://gateway.marvel.com/v1/public/characters/1009220",
             series: SeriesContainer(
                 available: 2,
                 collectionURI: "http://gateway.marvel.com/v1/public/characters/1009220/series",

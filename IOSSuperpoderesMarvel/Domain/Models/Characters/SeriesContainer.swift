@@ -9,6 +9,7 @@ import Foundation
 
 /// The series' container of a character.
 struct SeriesContainer: Codable {
+    
     /// The number of total available series in this list. Will always be greater than or equal to the "returned" value.
     let available: Int
     /// The path to the full list of series in this collection.
@@ -21,6 +22,7 @@ struct SeriesContainer: Codable {
 
 /// A Marvel Serie.
 struct SeriesItem: Codable {
+    
     /// The path to the individual series resource.
     let resourceURI: String
     /// The canonical name of the series.

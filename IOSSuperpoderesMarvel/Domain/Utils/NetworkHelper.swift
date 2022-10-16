@@ -75,18 +75,13 @@ struct Parameter {
     let value: String
 }
 
-protocol NetworkHelperProtocol: AnyObject {
-    static func getSessionCharacters(filter: [Parameter]?) -> URLRequest?
-    static func generateFilterUsing(name: String?, nameStartsWith: String?, appearsInSerie: String?, resultsLimit: Int?, skipResults: Int?, order: Order?) -> [Parameter]
-}
-
-final class NetworkHelper: NetworkHelperProtocol {
+final class NetworkHelper {
     
     static func getSessionCharacters(filter: [Parameter]?) -> URLRequest? {
         let stringURL = generateMarvelAPIUrl(fromEndPoint: .characters, andParameters: filter)
         guard let url = URL(string: stringURL) else { return nil }
        
-        // Get the URL reques and add body if needed
+        // Get the URL request and add body if needed
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethods.get
         
@@ -106,12 +101,12 @@ final class NetworkHelper: NetworkHelperProtocol {
     }
     
     static func generateFilterUsing(
-        name: String?,
-        nameStartsWith: String?,
-        appearsInSerie: String?,
-        resultsLimit: Int?,
-        skipResults: Int?,
-        order: Order?) -> [Parameter] {
+        name: String? = nil,
+        nameStartsWith: String? = nil,
+        appearsInSerie: String? = nil,
+        resultsLimit: Int? = nil,
+        skipResults: Int? = nil,
+        order: Order? = nil) -> [Parameter] {
             var parameterList: [Parameter] = []
             // Adds parameters to the list depending on selected values for filter
             if let name { parameterList.append(Parameter(parameterName: .name, value: name))}

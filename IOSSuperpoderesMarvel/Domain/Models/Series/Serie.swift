@@ -9,6 +9,7 @@ import Foundation
 
 /// A Marvel character's serie identified by an id.
 struct Serie: Codable, Identifiable {
+    
     /// The serie's id.
     let id: Int
     /// The serie's title.
