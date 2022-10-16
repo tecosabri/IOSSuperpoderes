@@ -87,8 +87,7 @@ final class CharacterViewModel: ObservableObject {
             } receiveValue: { data in
                 self.series = data.data.results
                 // Remove the series without image
-                self.series?.forEach {
-                    print($0.thumbnail.path)
+                self.series?.forEach { _ in
                     self.series = self.series?.filter { $0.thumbnail.path != "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/landscape_xlarge.jpg" }
                 }
             }

@@ -61,8 +61,11 @@ final class CharactersViewModel: ObservableObject {
                 let apiCharactersResponse = data.data.results
                 apiCharactersResponse.forEach { character in
                     let characterViewModel = CharacterViewModel(fromCharacter: character)
-                    if !(self.characters?.contains(characterViewModel) ?? true) {
+                    // Avoid duplicates in the array characters as well as characters with no picture
+                    if !(self.characters?.contains(characterViewModel) ?? true) &&
+                        character.thumbnail.path != "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/landscape_xlarge.jpg" {
                         self.characters?.append(characterViewModel)
+                        print(character.thumbnail.path)
                     }
                 }
             }
