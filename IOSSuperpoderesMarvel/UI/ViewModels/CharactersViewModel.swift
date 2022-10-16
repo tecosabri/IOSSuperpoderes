@@ -65,7 +65,6 @@ final class CharactersViewModel: ObservableObject {
                         self.characters?.append(characterViewModel)
                     }
                 }
-                print("received value")
             }
             .store(in: &suscriptors)
     }

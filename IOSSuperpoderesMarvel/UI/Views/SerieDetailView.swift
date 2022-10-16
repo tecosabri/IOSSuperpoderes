@@ -81,7 +81,7 @@ struct SerieDetailView_Previews: PreviewProvider {
             description: "Daken has been kidnapped, and it's up to Wolverine to find him. But when his trail brings her back to the Facility, the place that tortured and created her, what new horrors will Laura find cooking there? Who, exactly, are the Orphans of X? How are they connected to the Wolverine? And what do they know about Laura and her past?",
             thumbnail: Thumbnail(path: "https://i.annihil.us/u/prod/marvel/i/mg/3/b0/5a84b58724b37/clean.jpg"))
         newWolverine.thumbnail.portraitIncredible = "https://i.annihil.us/u/prod/marvel/i/mg/3/b0/5a84b58724b37/portrait_incredible.jpg"
-        newWolverine.description = nil
+//        newWolverine.description = nil
         
         return SerieDetailView(serie: newWolverine)
         

@@ -8,13 +8,8 @@
 import Foundation
 import CryptoKit
 
-protocol AuthenticationHelperProtocol: AnyObject {
-    static func generateMD5() throws -> (md5Code: String?, timeStamp: String)
-}
-
-
 /// Provides authentication for the Marvel API.
-class AuthenticationHelper: AuthenticationHelperProtocol {
+class AuthenticationHelper {
     
     static let privateKey = "106d4a90fd6df27742659f14d4c4a26015917214"
     static let publicKey = "5ed7dc76b420bc84a2d4a15450c50f4a"

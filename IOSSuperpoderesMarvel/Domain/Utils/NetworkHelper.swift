@@ -32,6 +32,7 @@ enum EndPoint: String {
 
 /// The different parameter names needed to work with the Marvel API.
 enum ParameterName: String {
+    
     // Authentication parameters
     /// The api key parameter corresponding the public key.
     case apikey = "apikey"
@@ -39,6 +40,7 @@ enum ParameterName: String {
     case timestamp = "ts"
     /// The hash parameter corresponding to the md5 code of the string (ts+apikey+privateKey) being the privateKey the authentication private key.
     case md5 = "hash"
+    
     // Other parameters
     /// A parameter that allows name filtering.
     case name = "name"
@@ -67,17 +69,23 @@ enum Order: String {
 }
 
 
-/// A representation of a parameter of a HTTPRequest
+/// A representation of a parameter of a HTTPRequest.
 struct Parameter {
-    /// The name of the parameter conforming to the API guidelines
+    /// The name of the parameter conforming to the API guidelines.
     let parameterName: ParameterName
-    /// The value of the parameter conforming to the API guidelines
+    /// The value of the parameter conforming to the API guidelines.
     let value: String
 }
 
+/// Helper class  that generates URLSession and filters for all API calls regarding characters and series.
 final class NetworkHelper {
     
+    
+    /// Gets the URLRequest to fetch characters with a given filter of parameters.
+    /// - Parameter filter: The parameters that will filter the fetch request.
+    /// - Returns: The URLRequest to fetch characters.
     static func getSessionCharacters(filter: [Parameter]?) -> URLRequest? {
+        
         let stringURL = generateMarvelAPIUrl(fromEndPoint: .characters, andParameters: filter)
         guard let url = URL(string: stringURL) else { return nil }
        
@@ -88,6 +96,10 @@ final class NetworkHelper {
         return request
     }
     
+    
+    /// Gets the URLSession to fetch all series for a given character-
+    /// - Parameter character: The character whose series' will be fetched.
+    /// - Returns: The URLRequest to fetch all series for a given character.
     static func getSessionSeries(forCharacter character: Character) -> URLRequest? {
         var stringURL = generateMarvelAPIUrl(fromEndPoint: .series, andParameters: nil)
         stringURL = stringURL.replacingOccurrences(of: "characterID", with: String(character.id))
@@ -100,33 +112,45 @@ final class NetworkHelper {
         return request
     }
     
+    
+    /// Generates a filter for a URLRequest.
+    /// - Parameters:
+    ///   - name: The parameter to filter by name-
+    ///   - nameStartsWith: The parameter to filter by starting characters.
+    ///   - resultsLimit: The parameter to limit the results fetched.
+    ///   - skipResults: The parameter to offset the results fetched.
+    /// - Returns: A list of parameters used to filter a URLRequest.
     static func generateFilterUsing(
         name: String? = nil,
         nameStartsWith: String? = nil,
         appearsInSerie: String? = nil,
         resultsLimit: Int? = nil,
-        skipResults: Int? = nil,
-        order: Order? = nil) -> [Parameter] {
+        skipResults: Int? = nil) -> [Parameter] {
             var parameterList: [Parameter] = []
             // Adds parameters to the list depending on selected values for filter
             if let name { parameterList.append(Parameter(parameterName: .name, value: name))}
             if let nameStartsWith { parameterList.append(Parameter(parameterName: .nameStartsWith, value: nameStartsWith))}
-            if let appearsInSerie { parameterList.append(Parameter(parameterName: .appearsInSeries, value: appearsInSerie))}
             if let resultsLimit { parameterList.append(Parameter(parameterName: .resultsLimit, value: String(resultsLimit)))}
             if let skipResults { parameterList.append(Parameter(parameterName: .skipResults, value: String(skipResults)))}
-            if let order { parameterList.append(Parameter(parameterName: .order, value: order.rawValue))}
             
             return parameterList
         }
     
     
+    /// Generates a valid URL to fetch data from the Marvel API.
+    /// - Parameters:
+    ///   - endPoint: The end point of the desired data in the Marvel API.
+    ///   - parameters: A list of parameters to filter the data.
+    /// - Returns: The URL of the desired data.
     private static func generateMarvelAPIUrl(fromEndPoint endPoint: EndPoint, andParameters parameters: [Parameter]?) -> String {
+        
         // Create authentication parameters
         guard let authentication = try? AuthenticationHelper.generateMD5(),
               let md5Code = authentication.md5Code else { return "" }
         let keyParam = Parameter(parameterName: .apikey, value: AuthenticationHelper.publicKey)
         let tsParam = Parameter(parameterName: .timestamp, value: authentication.timeStamp)
         let md5Param = Parameter(parameterName: .md5, value: md5Code)
+        
         // Add authentication parameters to parameters array
         var parametersCopy = [keyParam, tsParam, md5Param]
         parameters?.forEach { parameter in
@@ -144,7 +168,7 @@ final class NetworkHelper {
     
         stringURL.removeLast() // Last & has to be removed from the string
         stringURL = stringURL.components(separatedBy: .newlines).joined() // Delete newlines created by multiline and interpolation
-        guard let stringURL = stringURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return "" } // Timestamp has spaces: it's needed to notify to URL(string:)
+        guard let stringURL = stringURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return "" } // Timestamp has spaces: it is needed to notify to URL(string:)
     
         return stringURL
     }
