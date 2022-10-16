@@ -13,6 +13,8 @@ struct RootView: View {
     
     var body: some View {
         switch rootViewModel.status {
+        case .none:
+            SplashView()
         default:
             CharactersView(charactersViewModel: CharactersViewModel())
         }

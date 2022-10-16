@@ -65,7 +65,6 @@ final class CharactersViewModel: ObservableObject {
                     if !(self.characters?.contains(characterViewModel) ?? true) &&
                         character.thumbnail.path != "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/landscape_xlarge.jpg" {
                         self.characters?.append(characterViewModel)
-                        print(character.thumbnail.path)
                     }
                 }
             }
