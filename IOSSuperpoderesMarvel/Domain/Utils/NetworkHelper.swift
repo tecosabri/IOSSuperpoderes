@@ -7,44 +7,71 @@
 
 import Foundation
 
-
+/// The Marvel API base server url.
 let server = "https://gateway.marvel.com"
 
+/// The diferent HTTPMethods.
 struct HTTPMethods {
+    /// The post HTTP method.
     static let post = "POST"
+    /// The get HTTP method.
     static let get = "GET"
+    /// The put HTTP method.
     static let put = "PUT"
+    /// The delete HTTP method.
     static let delete = "DELETE"
 }
 
+/// The different endpoints of the Marvel API.
 enum EndPoint: String {
+    /// The characters endpoint of the Marvel API.
     case characters = "/v1/public/characters"
+    /// The series endpoint of the Marvel API where characterID has to be replaced by the character's id.
     case series = "/v1/public/characters/characterID/series"
 }
 
+/// The different parameter names needed to work with the Marvel API.
 enum ParameterName: String {
     // Authentication parameters
+    /// The api key parameter corresponding the public key.
     case apikey = "apikey"
+    /// The timestamp parameter whose value has to be varaible on time, eg. a timestamp.
     case timestamp = "ts"
+    /// The hash parameter corresponding to the md5 code of the string (ts+apikey+privateKey) being the privateKey the authentication private key.
     case md5 = "hash"
     // Other parameters
+    /// A parameter that allows name filtering.
     case name = "name"
+    /// A parameter that allows filtering by starting characters of a name.
     case nameStartsWith = "nameStartsWith"
+    /// A parameter that allows filtering by the series where a character appears.
     case appearsInSeries = "series"
+    /// A parameter that limits the returned results.
     case resultsLimit = "limit"
+    /// A parameter that allows the call to skip a desired number of rresults.
     case skipResults = "offset"
+    /// A parameter that allows to order the returned results.
     case order = "orderBy"
 }
 
+/// The order of the filtering.
 enum Order: String {
+    /// The order is ascending by name (a to the bottom).
     case nameAscending = "name"
+    /// The order is ascending by the last modification (last modified to the top).
     case modifiedAscending = "modified"
+    /// The order is descending by name (a to the top).
     case nameDescending = "-name"
+    /// The order is descending by the last modification (last modified to the bottom).
     case modifiedDescending = "-modified"
 }
 
+
+/// A representation of a parameter of a HTTPRequest
 struct Parameter {
+    /// The name of the parameter conforming to the API guidelines
     let parameterName: ParameterName
+    /// The value of the parameter conforming to the API guidelines
     let value: String
 }
 

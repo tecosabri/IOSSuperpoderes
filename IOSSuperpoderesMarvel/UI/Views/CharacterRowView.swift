@@ -20,53 +20,25 @@ struct CharacterRowView: View {
                 //                let imageURL = URL(string: characterViewModel.character.thumbnail.path)
                 
                 Text(characterViewModel.character.name)
-                    .frame(width: 220, height: 80, alignment: .top)
+                    .frame(width: 250, height: 80, alignment: .top)
                     .lineLimit(2)
                     .font(.title3)
                     .foregroundColor(.white)
                     .padding(5)
                     .zIndex(1)
                 
-                CachedAsyncImage(url: characterViewModel.character.thumbnail.path)
+                if let image = characterViewModel.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 250, height: 200)
+                }
                 
                 Rectangle()
                     .fill(LinearGradient(colors: [.black, .white], startPoint: .top, endPoint: .center))
-                    .frame(width: 250, height: 250)
+                    .frame(width: 250, height: 200)
                     .opacity(0.3)
                 
-                
-                //                AsyncImage(url: imageURL) { image in
-                //                    ZStack {
-                //                        image
-                //                            .resizable()
-                //                            .frame(width: 250, height: 250)
-                //
-                //                        Rectangle()
-                //                            .fill(LinearGradient(colors: [.black, .white], startPoint: .top, endPoint: .center))
-                //                            .opacity(0.3)
-                //                            .frame(width: 250, height: 250)
-                //                    }
-                //                } placeholder: {
-                //                    ZStack {
-                //                        Rectangle()
-                //                            .fill(.white)
-                //                            .frame(width: 250, height: 250)
-                //                            .border(.gray, width: 4)
-                //                            .scaledToFill()
-                //                            .opacity(1)
-                //                        Image(systemName: "photo")
-                //                            .opacity(0.8)
-                //                            .scaledToFill()
-                //                    }
-                //                }
-                
-                
             }
-        }
-        .onAppear {
-            print(URLCache.shared.memoryCapacity / 1024 / 1024)
-            URLCache.shared.memoryCapacity = 1024 * 1024 * 512
-            print(URLCache.shared.memoryCapacity / 1024 / 1024)
         }
     }
 }

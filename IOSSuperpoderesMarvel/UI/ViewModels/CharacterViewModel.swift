@@ -5,7 +5,7 @@
 //  Created by Ismael Sabri Pérez on 12/10/22.
 //
 
-import Foundation
+import UIKit
 import Combine
 
 protocol CharacterViewModelProtocol: AnyObject {
@@ -16,6 +16,8 @@ final class CharacterViewModel: ObservableObject {
     
     @Published var series: [Serie]?
     @Published var status = SceneStatus.none
+    @Published var image: UIImage?
+    @Published var imagePortrait: UIImage?
     
     private var suscriptors = Set<AnyCancellable>()
     
@@ -24,6 +26,30 @@ final class CharacterViewModel: ObservableObject {
     init(withUITesting testing: Bool = false, fromCharacter character: Character) {
         self.character = character
         getSeries()
+        downloadImages()
+    }
+    
+    private func downloadImages() {
+        // Download square image
+        let imageLoader1 = ImageLoader(url: character.thumbnail.path)
+        imageLoader1.fetch()
+        imageLoader1.$image
+            .replaceError(with: UIImage(systemName: "photo"))
+            .receive(on: DispatchQueue.main)
+            .sink { photo in
+                self.image = photo
+            }
+            .store(in: &suscriptors)
+        // Download portrait image
+        let imageLoader2 = ImageLoader(url: character.thumbnail.portraitIncredible)
+        imageLoader2.fetch()
+        imageLoader2.$image
+            .replaceError(with: UIImage(systemName: "photo"))
+            .receive(on: DispatchQueue.main)
+            .sink { photo in
+                self.imagePortrait = photo
+            }
+            .store(in: &suscriptors)
     }
     
     private func cancellAllSuscriptors() {

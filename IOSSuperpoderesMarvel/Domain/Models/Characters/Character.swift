@@ -7,11 +7,20 @@
 
 import Foundation
 
+/// A Marvel character identified by an id.
 struct Character: Codable, Identifiable {
+    /// The character's id.
     let id: Int
-    let name, description: String
+    /// The character's name.
+    let name: String
+    /// The character's description.
+    let description: String
+    /// The character''s last modification date.
     let modified: String
+    /// The character's thumbnail.
     var thumbnail: Thumbnail
+    /// The character's resourceURL.
     let resourceURI: String
+    /// The container of a character containing his series.
     let series: SeriesContainer
 }

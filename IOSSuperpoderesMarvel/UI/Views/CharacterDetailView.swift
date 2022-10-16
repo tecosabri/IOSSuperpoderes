@@ -27,13 +27,14 @@ struct CharacterDetail: View {
                             .foregroundColor(.white)
                             .zIndex(1)
                             .padding()
-
-                        image
-                            .resizable()
-                        Rectangle()
-                            .fill(LinearGradient(colors: [.black, .white], startPoint: .top, endPoint: .center))
-                            .frame(width: UIScreen.screenWidth)
-                            .opacity(0.3)
+                        if let image = characterViewModel.imagePortrait {
+                            Image(uiImage: image)
+                                .resizable()
+                            Rectangle()
+                                .fill(LinearGradient(colors: [.black, .white], startPoint: .top, endPoint: .center))
+                                .frame(width: UIScreen.screenWidth)
+                                .opacity(0.3)
+                        }
                     }
                 } placeholder: {
                     ZStack {
