@@ -15,7 +15,7 @@ struct Serie: Codable, Identifiable {
     /// The serie's title.
     let title: String
     /// The serie's description.
-    let description: String?
+    var description: String?
     /// The serie's thumbnail.
     var thumbnail: Thumbnail
 }

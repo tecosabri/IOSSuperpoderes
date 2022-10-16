@@ -20,8 +20,7 @@ final class CharactersViewModel: ObservableObject {
     private var suscriptors = Set<AnyCancellable>()
     
     init(withUITesting testing: Bool = false) {
-        let limitQueryToThreeCharactersFilter = NetworkHelper.generateFilterUsing(resultsLimit: 2)
-        testing ? getCharactersTesting() : getCharacters(filter: limitQueryToThreeCharactersFilter)
+        if testing { getCharactersTesting() }
     }
     
     private func cancellAllSuscriptors() {
@@ -60,7 +59,12 @@ final class CharactersViewModel: ObservableObject {
                 }
             } receiveValue: { data in
                 let apiCharactersResponse = data.data.results
-                apiCharactersResponse.forEach { self.characters?.append(CharacterViewModel(fromCharacter: $0)) }
+                apiCharactersResponse.forEach { character in
+                    let characterViewModel = CharacterViewModel(fromCharacter: character)
+                    if !(self.characters?.contains(characterViewModel) ?? true) {
+                        self.characters?.append(characterViewModel)
+                    }
+                }
                 print("received value")
             }
             .store(in: &suscriptors)

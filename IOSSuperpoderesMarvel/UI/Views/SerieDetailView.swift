@@ -18,15 +18,22 @@ struct SerieDetailView: View {
             AsyncImage(url: url) { image in
                 ZStack(alignment: .top) {
                     
-                    Text(serie.title)
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .zIndex(1)
-                        .padding()
-                    
-                    image
-                        .resizable()
-                        .opacity(0.7)
+                    if serie.description != nil {
+                        
+                        Text(serie.title)
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .bold()
+                            .zIndex(1)
+                            .padding()
+                        
+                        image
+                            .resizable()
+                            .opacity(0.5)
+                    } else {
+                        image
+                            .resizable()
+                    }
                     
                     Rectangle()
                         .fill(LinearGradient(colors: [.black, .white], startPoint: .top, endPoint: .center))
@@ -40,7 +47,7 @@ struct SerieDetailView: View {
                     Rectangle()
                         .fill(.white)
                         .border(.gray, width: 4)
-                        .scaledToFill()
+                        .scaledToFit()
                         .opacity(1)
                     Image(systemName: "photo")
                         .opacity(0.8)
@@ -73,7 +80,8 @@ struct SerieDetailView_Previews: PreviewProvider {
             title: "All-New Wolverine Vol. 5: Orphans of X (2018)",
             description: "Daken has been kidnapped, and it's up to Wolverine to find him. But when his trail brings her back to the Facility, the place that tortured and created her, what new horrors will Laura find cooking there? Who, exactly, are the Orphans of X? How are they connected to the Wolverine? And what do they know about Laura and her past?",
             thumbnail: Thumbnail(path: "https://i.annihil.us/u/prod/marvel/i/mg/3/b0/5a84b58724b37/clean.jpg"))
-        newWolverine.thumbnail.portraitIncredible = "https://i.annihil.us/u/prod/marvel/i/mg/3/b0/5a84b58724b37/clean/portrait_incredible.jpg"
+        newWolverine.thumbnail.portraitIncredible = "https://i.annihil.us/u/prod/marvel/i/mg/3/b0/5a84b58724b37/portrait_incredible.jpg"
+        newWolverine.description = nil
         
         return SerieDetailView(serie: newWolverine)
         

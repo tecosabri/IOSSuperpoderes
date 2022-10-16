@@ -13,7 +13,7 @@ protocol CharacterViewModelProtocol: AnyObject {
 }
 
 final class CharacterViewModel: ObservableObject {
-    
+
     @Published var series: [Serie]?
     @Published var status = SceneStatus.none
     @Published var image: UIImage?
@@ -115,5 +115,12 @@ final class CharacterViewModel: ObservableObject {
         let wolverineSeries = [aPlusX, newXMen, newWolverine]
         
         self.series = wolverineSeries
+    }
+}
+
+extension CharacterViewModel: Equatable {
+    
+    static func == (lhs: CharacterViewModel, rhs: CharacterViewModel) -> Bool {
+        lhs.character.name == rhs.character.name
     }
 }

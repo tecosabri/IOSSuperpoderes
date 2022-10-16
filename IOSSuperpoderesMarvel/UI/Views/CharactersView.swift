@@ -19,32 +19,37 @@ struct CharactersView: View {
     }
     
     var body: some View {
-        if(charactersViewModel.status == .loaded) {
-            NavigationStack {
-                List {
-                    if let characters {
-                        ForEach(characters, id: \.character.id) { characterViewModel in
-                            NavigationLink {
-                                CharacterDetail(characterViewModel: characterViewModel)
-                            } label: {
-                                HStack{ // Center view
-                                    Spacer()
-                                    CharacterRowView(characterViewModel: characterViewModel)
-                                    Spacer()
-                                }
+        
+        NavigationStack {
+            List {
+                if let characters {
+                    ForEach(characters, id: \.character.id) { characterViewModel in
+                        NavigationLink {
+                            CharacterDetail(characterViewModel: characterViewModel)
+                        } label: {
+                            HStack{ // Center view
+                                Spacer()
+                                CharacterRowView(characterViewModel: characterViewModel)
+                                Spacer()
                             }
-                            .listRowSeparator(.hidden) // Hides separator between characters
                         }
+                        .listRowSeparator(.hidden) // Hides separator between characters
                     }
                 }
-                .scrollContentBackground(.hidden)
-                .navigationTitle("Marvel heros")
-                .searchable(text: $searchBarText, prompt: "Search your hero")
-                .autocorrectionDisabled()
-                .textInputAutocapitalization(TextInputAutocapitalization.never)
+            }
+            .scrollContentBackground(.hidden)
+            .navigationTitle("Marvel heros")
+            .searchable(text: $searchBarText, prompt: "Search your hero")
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(TextInputAutocapitalization.never)
+            .onChange(of: searchBarText) { name in
+                if !name.isEmpty {
+                    charactersViewModel.getCharacters(filter: NetworkHelper.generateFilterUsing(nameStartsWith: name, resultsLimit: 3)) }
+                if name.isEmpty { charactersViewModel.characters = [] }
             }
         }
     }
+    
 }
 
 struct CharactersView_Previews: PreviewProvider {
