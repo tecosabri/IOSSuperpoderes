@@ -19,3 +19,4 @@ struct Serie: Codable, Identifiable {
     /// The serie's thumbnail.
     var thumbnail: Thumbnail
 }
+
