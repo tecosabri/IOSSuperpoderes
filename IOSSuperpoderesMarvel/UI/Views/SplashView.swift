@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SplashView: View {
     
-    @State var opacity: Double = 1
+    @State var changeOpacity: Bool = false
     @EnvironmentObject var rootViewModel: RootViewModel
     
     var body: some View {
@@ -18,18 +18,15 @@ struct SplashView: View {
             Image("marvelLogo")
                 .resizable()
                 .scaledToFit()
+                .opacity(changeOpacity ? 1 : 0)
                 .onAppear() {
+                    withAnimation(.linear(duration: 3)) {
+                        changeOpacity.toggle()
+                    }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         rootViewModel.status = .loaded
                     }
                 }
-            
-            //
-            //            Rectangle()
-            //                .fill(.white)
-            //                .scaledToFit()
-            //                .opacity(opacity)
-            //                .transition(.opacity)
         }
     }
 }
