@@ -88,7 +88,7 @@ final class NetworkHelper {
         
         let stringURL = generateMarvelAPIUrl(fromEndPoint: .characters, andParameters: filter)
         guard let url = URL(string: stringURL) else { return nil }
-       
+        
         // Get the URL request and add body if needed
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethods.get
@@ -104,7 +104,7 @@ final class NetworkHelper {
         var stringURL = generateMarvelAPIUrl(fromEndPoint: .series, andParameters: nil)
         stringURL = stringURL.replacingOccurrences(of: "characterID", with: String(character.id))
         guard let url = URL(string: stringURL) else { return nil }
-       
+        
         // Get the URL reques and add body if needed
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethods.get
@@ -156,7 +156,7 @@ final class NetworkHelper {
         parameters?.forEach { parameter in
             parametersCopy.append(parameter)
         }
-      
+        
         // Create string from server + endpoint + parameters
         var stringURL = "\(server)\(endPoint.rawValue)?"
         parametersCopy.forEach { parameter in
@@ -165,11 +165,11 @@ final class NetworkHelper {
             stringURL.append(parameter.value)
             stringURL.append("&")
         }
-    
+        
         stringURL.removeLast() // Last & has to be removed from the string
         stringURL = stringURL.components(separatedBy: .newlines).joined() // Delete newlines created by multiline and interpolation
         guard let stringURL = stringURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return "" } // Timestamp has spaces: it is needed to notify to URL(string:)
-    
+        
         return stringURL
     }
     

@@ -37,7 +37,7 @@ class ImageLoader: ObservableObject {
         guard image == nil && !isLoading else { return }
         
         isLoading = true
-
+        
         guard let url,
               let fetchURL = URL(string: url) else { return }
         

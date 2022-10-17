@@ -43,9 +43,7 @@ struct CharactersView: View {
             .autocorrectionDisabled()
             .textInputAutocapitalization(TextInputAutocapitalization.never)
             .onChange(of: searchBarText) { name in
-                if !name.isEmpty {
-                    charactersViewModel.getCharacters(filter: NetworkHelper.generateFilterUsing(nameStartsWith: name, resultsLimit: 3)) }
-                if name.isEmpty { charactersViewModel.characters = [] }
+                charactersViewModel.onChangeSearchText(searchText: name)
             }
         }
     }

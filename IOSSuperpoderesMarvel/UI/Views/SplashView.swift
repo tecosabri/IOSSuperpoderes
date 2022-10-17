@@ -23,13 +23,13 @@ struct SplashView: View {
                         rootViewModel.status = .loaded
                     }
                 }
-                
-//
-//            Rectangle()
-//                .fill(.white)
-//                .scaledToFit()
-//                .opacity(opacity)
-//                .transition(.opacity)
+            
+            //
+            //            Rectangle()
+            //                .fill(.white)
+            //                .scaledToFit()
+            //                .opacity(opacity)
+            //                .transition(.opacity)
         }
     }
 }

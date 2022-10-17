@@ -18,7 +18,7 @@ struct SerieRowView: View {
                 image
                     .resizable()
                     .scaledToFill()
-                    
+                
             } placeholder: {
                 ZStack {
                     Rectangle()

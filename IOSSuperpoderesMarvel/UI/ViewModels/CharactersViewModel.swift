@@ -17,9 +17,11 @@ final class CharactersViewModel: ObservableObject {
     /// The status of the view model with .none dafault value.
     @Published var status = SceneStatus.none
     
+    /// The limit of characters per request is 10 by default
+    let requestLimit: Int = 4
     /// The suscriptors that suscribed to publishers in the characters view model.
     private var suscriptors = Set<AnyCancellable>()
-
+    
     
     ///  The initializer of the characters view model used to test UI.
     /// - Parameter testing: True if this view model will be tested in the UI preview.
@@ -80,8 +82,19 @@ final class CharactersViewModel: ObservableObject {
             .store(in: &suscriptors)
     }
     
-    // MARK: - UITesting functions
     
+    /// Update the characters array depending on the `searchText` parameter.
+    /// - Parameter searchText: The text that will filter the request to get the characters from the API.
+    func onChangeSearchText(searchText: String) {
+        if !searchText.isEmpty {
+            getCharacters(filter: NetworkHelper.generateFilterUsing(nameStartsWith: searchText, resultsLimit: requestLimit)) }
+        if searchText.isEmpty { characters = [] }
+    }
+}
+
+// MARK: - UITesting functions
+extension CharactersViewModel {
+
     /// Gets four predefined characters for UI testing.
     func getCharactersTesting() {
         
@@ -162,7 +175,7 @@ final class CharactersViewModel: ObservableObject {
                            CharacterViewModel(fromCharacter: blackWidow),
                            CharacterViewModel(fromCharacter: thor)]
         
-        self.status = .loaded // To show view 
+        self.status = .loaded // To show view
     }
 }
 
