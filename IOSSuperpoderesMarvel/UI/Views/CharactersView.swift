@@ -12,38 +12,40 @@ struct CharactersView: View {
     @ObservedObject var charactersViewModel: CharactersViewModel
     
     @State private var searchBarText: String = ""
-    
+    @State private var isEmptyList: Bool = true
+
     private var characters: [CharacterViewModel]? {
-        if searchBarText.isEmpty { return charactersViewModel.characters }
-        return charactersViewModel.characters?.filter { $0.character.name.localizedCaseInsensitiveContains(searchBarText) }
+        charactersViewModel.characters
     }
     
     var body: some View {
         
-        NavigationStack {
-            List {
-                if let characters {
-                    ForEach(characters, id: \.character.id) { characterViewModel in
-                        NavigationLink {
-                            CharacterDetail(characterViewModel: characterViewModel)
-                        } label: {
-                            HStack{ // Center view
-                                Spacer()
-                                CharacterRowView(characterViewModel: characterViewModel)
-                                Spacer()
+        ZStack {
+            NavigationStack {
+                List {
+                    if let characters {
+                        ForEach(characters, id: \.character.id) { characterViewModel in
+                            NavigationLink {
+                                CharacterDetail(characterViewModel: characterViewModel)
+                            } label: {
+                                HStack{ // Center view
+                                    Spacer()
+                                    CharacterRowView(characterViewModel: characterViewModel)
+                                    Spacer()
+                                }
                             }
+                            .listRowSeparator(.hidden) // Hides separator between characters
                         }
-                        .listRowSeparator(.hidden) // Hides separator between characters
                     }
                 }
-            }
-            .scrollContentBackground(.hidden)
-            .navigationTitle("Marvel heros")
-            .searchable(text: $searchBarText, prompt: "Search your hero")
-            .autocorrectionDisabled()
-            .textInputAutocapitalization(TextInputAutocapitalization.never)
-            .onChange(of: searchBarText) { name in
-                charactersViewModel.onChangeSearchText(searchText: name)
+                .scrollContentBackground(.hidden)
+                .navigationTitle("Marvel heros")
+                .searchable(text: $searchBarText, prompt: "Search your hero")
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(TextInputAutocapitalization.never)
+                .onChange(of: searchBarText) { name in
+                    charactersViewModel.onChangeSearchText(searchText: name)
+                }
             }
         }
     }

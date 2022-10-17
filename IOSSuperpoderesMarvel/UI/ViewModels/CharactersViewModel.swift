@@ -34,7 +34,7 @@ final class CharactersViewModel: ObservableObject {
         suscriptors.forEach { $0.cancel() }
     }
     
-    /// Gets desired characters filtered by the filter parameter.
+    /// Gets desired characters filtered by the filter parameter. The returned array has no duplicates nor characters without image.
     ///
     /// This function cancells all prexistent suscriptors to avoid populating the suscriptors array unnecessarily.
     /// - Parameter filter: The filter of the request with nil default value.
@@ -70,14 +70,13 @@ final class CharactersViewModel: ObservableObject {
                 }
             } receiveValue: { data in
                 let apiCharactersResponse = data.data.results
-                apiCharactersResponse.forEach { character in
-                    let characterViewModel = CharacterViewModel(fromCharacter: character)
-                    // Avoid duplicates in the array characters as well as characters with no picture
-                    if !(self.characters?.contains(characterViewModel) ?? true) &&
-                        character.thumbnail.path != "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/landscape_xlarge.jpg" {
-                        self.characters?.append(characterViewModel)
-                    }
-                }
+                var characterViewModels: [CharacterViewModel] = []
+                apiCharactersResponse.forEach { characterViewModels.append(CharacterViewModel(fromCharacter: $0)) }
+                // Avoid empty image characters
+                characterViewModels = characterViewModels.filter { $0.character.thumbnail.path != "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/landscape_xlarge.jpg" }
+                // Avoid duplicates
+                characterViewModels = characterViewModels.filter { characterViewModels.contains($0) }
+                self.characters = characterViewModels
             }
             .store(in: &suscriptors)
     }
@@ -86,8 +85,8 @@ final class CharactersViewModel: ObservableObject {
     /// Update the characters array depending on the `searchText` parameter.
     /// - Parameter searchText: The text that will filter the request to get the characters from the API.
     func onChangeSearchText(searchText: String) {
-        if !searchText.isEmpty {
-            getCharacters(filter: NetworkHelper.generateFilterUsing(nameStartsWith: searchText, resultsLimit: requestLimit)) }
+        if !searchText.isEmpty { getCharacters(filter: [Parameter(parameterName: .nameStartsWith, value: searchText)])}
+        characters = characters?.sorted(by: { $0.character.name < $1.character.name })
         if searchText.isEmpty { characters = [] }
     }
 }

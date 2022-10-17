@@ -20,7 +20,7 @@ struct SplashView: View {
                 .scaledToFit()
                 .opacity(changeOpacity ? 1 : 0)
                 .onAppear() {
-                    withAnimation(.linear(duration: 3)) {
+                    withAnimation(.linear(duration: 2)) {
                         changeOpacity.toggle()
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
