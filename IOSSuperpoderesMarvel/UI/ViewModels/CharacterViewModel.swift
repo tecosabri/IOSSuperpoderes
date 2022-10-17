@@ -8,27 +8,40 @@
 import UIKit
 import Combine
 
-protocol CharacterViewModelProtocol: AnyObject {
-    
-}
 
+/// The view model to manage a Marvel character.
 final class CharacterViewModel: ObservableObject {
-    
+    /// The Marvel series where the character of the character view model appears.
     @Published var series: [Serie]?
+    /// The status of the character view model with .none default value.
     @Published var status = SceneStatus.none
+    /// The landscape image (270x200px) of the thumbnail that shows the character of the character view model.
     @Published var image: UIImage?
+    /// The portrait image (216x324px) of the thumbnail that shows the character of the character view model.
     @Published var imagePortrait: UIImage?
     
+    /// The suscriptors that suscribed to publishers in the character view model.
     private var suscriptors = Set<AnyCancellable>()
-    
+    /// The character of the character view model.
     var character: Character
     
+    
+    /// This initializer assigns the series and the images to a character.
+    /// - Parameters:
+    ///   - testing: True if the 
+    ///   - character: <#character description#>
     init(withUITesting testing: Bool = false, fromCharacter character: Character) {
         self.character = character
         getSeries()
         downloadImages()
     }
     
+    /// Cancells all suscriptors in the characters view model.
+    private func cancellAllSuscriptors() {
+        suscriptors.forEach { $0.cancel() }
+    }
+    
+    /// Downloads and assigns the `image` and `imagePortrait` properties.
     private func downloadImages() {
         // Download square image
         let imageLoader1 = ImageLoader(url: character.thumbnail.path)
@@ -52,11 +65,7 @@ final class CharacterViewModel: ObservableObject {
             .store(in: &suscriptors)
     }
     
-    private func cancellAllSuscriptors() {
-        suscriptors.forEach { $0.cancel() }
-    }
-    
-    
+    /// Gets all the series where the character of this character view model appears.
     func getSeries() {
         // Cancels every suscriptor that is not being used
         cancellAllSuscriptors()
@@ -95,6 +104,8 @@ final class CharacterViewModel: ObservableObject {
     }
         
         // MARK: - UITesting functions
+    
+    /// Gets three predefined series and assigns them to the `series`property.
         func getSeriesTesting() {
             
             let aPlusX = Serie(
@@ -124,6 +135,11 @@ final class CharacterViewModel: ObservableObject {
     
     extension CharacterViewModel: Equatable {
         
+        /// The equals function returns true if both the characters of the two character view models being compared have the same name.
+        /// - Parameters:
+        ///   - lhs: One of the character view models being compared.
+        ///   - rhs: One of the character view models being compared.
+        /// - Returns: True if the name of both names of the  characters in the character view models being compared are the same.
         static func == (lhs: CharacterViewModel, rhs: CharacterViewModel) -> Bool {
             lhs.character.name == rhs.character.name
         }

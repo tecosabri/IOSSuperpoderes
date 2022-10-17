@@ -8,25 +8,34 @@
 import Foundation
 import Combine
 
-protocol CharactersViewModelProtocol: AnyObject {
-    
-}
 
+/// A view model to manage Marvel characters.,
 final class CharactersViewModel: ObservableObject {
     
+    /// The Marvel characters.
     @Published var characters: [CharacterViewModel]? = []
+    /// The status of the view model with .none dafault value.
     @Published var status = SceneStatus.none
     
+    /// The suscriptors that suscribed to publishers in the characters view model.
     private var suscriptors = Set<AnyCancellable>()
+
     
+    ///  The initializer of the characters view model used to test UI.
+    /// - Parameter testing: True if this view model will be tested in the UI preview.
     init(withUITesting testing: Bool = false) {
         if testing { getCharactersTesting() }
     }
     
+    /// Cancells all suscriptors in the characters view model.
     private func cancellAllSuscriptors() {
         suscriptors.forEach { $0.cancel() }
     }
     
+    /// Gets desired characters filtered by the filter parameter.
+    ///
+    /// This function cancells all prexistent suscriptors to avoid populating the suscriptors array unnecessarily.
+    /// - Parameter filter: The filter of the request with nil default value.
     func getCharacters(filter: [Parameter]? = nil) {
         
         status = .loading
@@ -72,6 +81,8 @@ final class CharactersViewModel: ObservableObject {
     }
     
     // MARK: - UITesting functions
+    
+    /// Gets four predefined characters for UI testing.
     func getCharactersTesting() {
         
         let wolverine = Character(
@@ -151,7 +162,7 @@ final class CharactersViewModel: ObservableObject {
                            CharacterViewModel(fromCharacter: blackWidow),
                            CharacterViewModel(fromCharacter: thor)]
         
-        self.status = .loaded
+        self.status = .loaded // To show view 
     }
 }
 
