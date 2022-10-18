@@ -11,8 +11,6 @@ import SwiftUI
 struct IOSSuperpoderesMarvelApp: App {
     
     @StateObject var rootViewModel = RootViewModel()
-    let persistenceController = PersistenceController.shared
-
     var body: some Scene {
         WindowGroup {
             RootView()

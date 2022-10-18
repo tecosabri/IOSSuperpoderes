@@ -45,7 +45,17 @@ struct CharactersView: View {
                 .textInputAutocapitalization(TextInputAutocapitalization.never)
                 .onChange(of: searchBarText) { name in
                     charactersViewModel.onChangeSearchText(searchText: name)
+                    if characters != nil {
+                        isEmptyList = characters!.isEmpty
+                    }
                 }
+            }
+            
+            
+            if isEmptyList {
+                Image("marvelLogo")
+                    .resizable()
+                    .scaledToFit()
             }
         }
     }
