@@ -3,7 +3,29 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in closure #1 in CharactersView.body.getter:CharactersView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CharactersViewModel.onChangeSearchText(searchText:):CharactersViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "characters">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CharactersViewModel.getCharacters(withFilter:inOrder:):CharactersViewModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CharactersView.body.getter:CharactersView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "_searchBarText">
+            </PersistentString>
+            <PersistentString
+               value = "_isEmptyList">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

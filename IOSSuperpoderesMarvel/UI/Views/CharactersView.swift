@@ -22,8 +22,9 @@ struct CharactersView: View {
         
         ZStack {
             NavigationStack {
+                
                 List {
-                    if let characters {
+                    if let characters, !isEmptyList { // !isEmptyList avoids characters from reprinting bcause of api late response
                         ForEach(characters, id: \.character.id) { characterViewModel in
                             NavigationLink {
                                 CharacterDetail(characterViewModel: characterViewModel)
@@ -45,9 +46,7 @@ struct CharactersView: View {
                 .textInputAutocapitalization(TextInputAutocapitalization.never)
                 .onChange(of: searchBarText) { name in
                     charactersViewModel.onChangeSearchText(searchText: name)
-                    if characters != nil {
-                        isEmptyList = characters!.isEmpty
-                    }
+                    isEmptyList = name.isEmpty
                 }
             }
             
