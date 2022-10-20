@@ -17,7 +17,7 @@ final class ThumbnailTests: XCTestCase {
             }
             """
     
-    func test_WhenThumbnailInstantiationFromDecoder_ReturnsObject() {
+    func test_ThumbnailInit_WhenThumbnailInstantiationFromDecoder_ReturnsNotNilObject() {
         // Given
         guard let thumbnailData = thumbnailJSON.data(using: .utf8) else { return }
         let jsonDecoder = JSONDecoder()
@@ -27,7 +27,7 @@ final class ThumbnailTests: XCTestCase {
         XCTAssertNotNil(thumbnail, "Thumbnail can't be nil")
     }
     
-    func test_WhenThumbnailInstantiated_PathIsLandscapeLarge() {
+    func test_ThumbnailInit_WhenThumbnailInstantiated_PathIsLandscapeLarge() {
         // Given
         guard let thumbnailData = thumbnailJSON.data(using: .utf8) else { return }
         let jsonDecoder = JSONDecoder()
@@ -37,7 +37,7 @@ final class ThumbnailTests: XCTestCase {
         XCTAssertEqual(notNilThumbnail!.path, "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/landscape_xlarge.jpg")
     }
     
-    func test_WhenThumbnailInstantiated_PathIsPortraitIncredible() {
+    func test_ThumbnailInit_WhenThumbnailInstantiated_PathIsPortraitIncredible() {
         // Given
         guard let thumbnailData = thumbnailJSON.data(using: .utf8) else { return }
         let jsonDecoder = JSONDecoder()
@@ -47,7 +47,7 @@ final class ThumbnailTests: XCTestCase {
         XCTAssertEqual(notNilThumbnail!.portraitIncredible, "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/portrait_incredible.jpg")
     }
     
-    func test_WhenThumbnailInitialized_ReturnsObject() {
+    func test_ThumbnailInit_WhenThumbnailInitialized_ReturnsNotNilObject() {
         // Given
         // When
         let thumbnail = Thumbnail(path: "path")

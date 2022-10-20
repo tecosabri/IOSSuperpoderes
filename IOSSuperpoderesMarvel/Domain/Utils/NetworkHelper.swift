@@ -80,7 +80,6 @@ struct Parameter {
 /// Helper class  that generates URLSession and filters for all API calls regarding characters and series.
 final class NetworkHelper {
     
-    
     /// Gets the URLRequest to fetch characters with a given filter of parameters.
     /// - Parameter filter: The parameters that will filter the fetch request.
     /// - Returns: The URLRequest to fetch characters.
@@ -123,7 +122,6 @@ final class NetworkHelper {
     static func generateFilterUsing(
         name: String? = nil,
         nameStartsWith: String? = nil,
-        appearsInSerie: String? = nil,
         resultsLimit: Int? = nil,
         skipResults: Int? = nil) -> [Parameter] {
             var parameterList: [Parameter] = []

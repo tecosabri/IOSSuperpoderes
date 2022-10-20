@@ -10,7 +10,7 @@ import XCTest
 
 final class TestingModelsTests: XCTestCase {
     
-    func test_GetCharactersTesting_WhenCalled_ReturnsObject() {
+    func test_GetCharactersTesting_WhenCalled_ReturnsNotNilObject() {
         // Given
         // When
         let object = TestingModels.getCharactersTesting()
@@ -34,7 +34,7 @@ final class TestingModelsTests: XCTestCase {
         XCTAssertEqual(object[0].character.name, "Wolverine", "The name of the first character must be Wolverine")
     }
     
-    func test_GetSeriesTesting_WhenCalled_ReturnsObject() {
+    func test_GetSeriesTesting_WhenCalled_ReturnsNotNilObject() {
         // Given
         // When
         let object = TestingModels.getSeriesTesting()

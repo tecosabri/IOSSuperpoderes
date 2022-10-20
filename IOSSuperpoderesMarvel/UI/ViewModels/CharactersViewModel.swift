@@ -10,8 +10,8 @@ import Combine
 
 
 /// A view model to manage Marvel characters.,
-final class CharactersViewModel: ObservableObject {
-    
+final class CharactersViewModel: ObservableObject{
+
     /// The Marvel characters.
     @Published var characters: [CharacterViewModel]? = []
     /// The status of the view model with .none dafault value.
@@ -19,13 +19,15 @@ final class CharactersViewModel: ObservableObject {
     
     /// The limit of characters per request is 10 by default
     let requestLimit: Int = 4
+    let networkFetching: NetworkFetching
     /// The suscriptors that suscribed to publishers in the characters view model.
     private var suscriptors = Set<AnyCancellable>()
     
     
     ///  The initializer of the characters view model used to test UI.
     /// - Parameter testing: True if this view model will be tested in the UI preview.
-    init(withUITesting testing: Bool = false) {
+    init(withUITesting testing: Bool = false, networkFetching: NetworkFetching = URLSession.shared) {
+        self.networkFetching = networkFetching
         if testing { characters = TestingModels.getCharactersTesting() }
     }
     
@@ -38,33 +40,20 @@ final class CharactersViewModel: ObservableObject {
     ///
     /// This function cancells all prexistent suscriptors to avoid populating the suscriptors array unnecessarily.
     /// - Parameter filter: The filter of the request with nil default value.
-    func getCharacters(filter: [Parameter]? = nil) {
+    func getCharacters(filter: [Parameter]? = nil, comp: ((Character?) -> ())? = nil) {
         
         status = .loading
         // Cancels every suscriptor that is not being used
         cancellAllSuscriptors()
         
-        // Get the request for characters depending on if it will be filtered or return all characters
-        guard let urlRequest = NetworkHelper.getSessionCharacters(filter: filter) else { return }
-        
-        // Assign the received characters to the characters array
-        URLSession.shared
-            .dataTaskPublisher(for: urlRequest)
-            .tryMap { data, response in
-                guard let response = response as? HTTPURLResponse,
-                      response.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                
-                return data
-            }
-            .decode(type: CharactersDataWrapper.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main)
+        // Assign the received characters to the characters array. Networkfetching used to make it testable
+        fetchCharacters(filter: filter)
             .sink { completion in
                 switch completion{
                 case .finished:
                     self.status = .loaded
                 case .failure(let error):
+                    if let comp { comp(Optional<Character>.none)}
                     print(String(describing: error))
                     self.status = .error(error: "Error loading characters")
                 }
@@ -77,11 +66,11 @@ final class CharactersViewModel: ObservableObject {
                 // Avoid duplicates
                 characterViewModels = characterViewModels.filter { characterViewModels.contains($0) }
                 self.characters = characterViewModels
+                if let comp { comp(characterViewModels[0].character)} // To make it testable
             }
             .store(in: &suscriptors)
     }
-    
-    
+
     /// Update the characters array depending on the `searchText` parameter.
     /// - Parameter searchText: The text that will filter the request to get the characters from the API.
     func onChangeSearchText(searchText: String) {
@@ -89,6 +78,20 @@ final class CharactersViewModel: ObservableObject {
         characters = characters?.sorted(by: { $0.character.name < $1.character.name })
         if searchText.isEmpty { characters = [] }
     }
+}
+
+extension CharactersViewModel: CharactersFetching {
+    
+    
+    func fetchCharacters(filter: [Parameter]?) -> AnyPublisher<CharactersDataWrapper, Error> {
+        // Get the request for characters depending on if it will be filtered or return all characters
+        let urlRequest = NetworkHelper.getSessionCharacters(filter: filter)
+        return networkFetching.load(urlRequest!)
+            .decode(type: CharactersDataWrapper.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
 }
 
 
