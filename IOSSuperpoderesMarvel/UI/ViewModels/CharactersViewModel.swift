@@ -19,6 +19,7 @@ final class CharactersViewModel: ObservableObject{
     
     /// The limit of characters per request is 10 by default
     let requestLimit: Int = 4
+    /// The network fetcher.
     let networkFetching: NetworkFetching
     /// The suscriptors that suscribed to publishers in the characters view model.
     private var suscriptors = Set<AnyCancellable>()
@@ -26,6 +27,7 @@ final class CharactersViewModel: ObservableObject{
     
     ///  The initializer of the characters view model used to test UI.
     /// - Parameter testing: True if this view model will be tested in the UI preview.
+    /// - Parameter networkFetching: The network fetcher.
     init(withUITesting testing: Bool = false, networkFetching: NetworkFetching = URLSession.shared) {
         self.networkFetching = networkFetching
         if testing { characters = TestingModels.getCharactersTesting() }

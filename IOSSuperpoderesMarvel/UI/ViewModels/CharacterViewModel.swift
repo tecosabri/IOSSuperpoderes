@@ -20,6 +20,8 @@ final class CharacterViewModel: ObservableObject {
     /// The portrait image (216x324px) of the thumbnail that shows the character of the character view model.
     @Published var imagePortrait: UIImage?
     
+    /// The network fetcher.
+    let networkFetching: NetworkFetching
     /// The suscriptors that suscribed to publishers in the character view model.
     private var suscriptors = Set<AnyCancellable>()
     /// The character of the character view model.
@@ -30,7 +32,9 @@ final class CharacterViewModel: ObservableObject {
     /// - Parameters:
     ///   - testing: True if the series will be UI tested with false default value.
     ///   - character: The character of this view model.
-    init(withUITesting testing: Bool = false, fromCharacter character: Character) {
+    /// - Parameter networkFetching: The network fetcher.
+    init(withUITesting testing: Bool = false, fromCharacter character: Character, networkFetching: NetworkFetching = URLSession.shared) {
+        self.networkFetching = networkFetching
         self.character = character
         if testing { series = TestingModels.getSeriesTesting()}
         else { getSeries() }
@@ -67,30 +71,17 @@ final class CharacterViewModel: ObservableObject {
     }
     
     /// Gets all the series where the character of this character view model appears.
-    func getSeries() {
+    func getSeries(comp: ((Serie?) -> ())? = nil) {
         // Cancels every suscriptor that is not being used
         cancellAllSuscriptors()
         
-        // Get the request for series of the character
-        guard let urlRequest = NetworkHelper.getSessionSeries(forCharacter: character) else { return }
-        
         // Assign the received series to the series array
-        URLSession.shared
-            .dataTaskPublisher(for: urlRequest)
-            .tryMap { data, response in
-                guard let response = response as? HTTPURLResponse,
-                      response.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                
-                return data
-            }
-            .decode(type: SeriesDataWrapper.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main)
+        fetchSeries()
             .sink { completion in
                 switch completion {
                 case .failure:
                     self.status = .error(error: "Error loading series")
+                    if let comp { comp(Optional<Serie>.none) }
                 case .finished:
                     self.status = .loaded
                 }
@@ -100,6 +91,7 @@ final class CharacterViewModel: ObservableObject {
                 self.series?.forEach { _ in
                     self.series = self.series?.filter { $0.thumbnail.path != "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/landscape_xlarge.jpg" }
                 }
+                if let comp, let serie = self.series { comp(serie[0]) }
             }
             .store(in: &suscriptors)
     }
@@ -114,5 +106,19 @@ extension CharacterViewModel: Equatable {
     /// - Returns: True if the name of both names of the  characters in the character view models being compared are the same.
     static func == (lhs: CharacterViewModel, rhs: CharacterViewModel) -> Bool {
         lhs.character.name == rhs.character.name
+    }
+}
+
+extension CharacterViewModel: SeriesFetching {
+    
+    /// Fetches all series of a character..
+    /// - Returns: A publisher to fetch series  receiving in the main thread.
+    func fetchSeries() -> AnyPublisher<SeriesDataWrapper, Error> {
+        // Get the request for the series
+        let urlRequest = NetworkHelper.getSessionSeries(forCharacter: self.character)
+        return networkFetching.load(urlRequest!)
+            .decode(type: SeriesDataWrapper.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
 }

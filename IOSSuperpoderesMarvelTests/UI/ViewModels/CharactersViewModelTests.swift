@@ -118,7 +118,7 @@ final class CharactersViewModelTests: XCTestCase {
         let charactersUpdatedExpectation = XCTestExpectation(description: "Updates characters")
         // When
         sut.fetchCharacters(filter: [Parameter(parameterName: .name, value: "Peggy Carter (Captain Carter)")])
-            .sink(receiveCompletion: {completion in
+            .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     print("finished")
@@ -148,7 +148,7 @@ final class CharactersViewModelTests: XCTestCase {
         wait(for: [charactersUpdatedExpectation], timeout: 1)
     }
     
-    func test_GetCharacters_WhenRequestFails_StatusSetToError() {
+    func test_GetCharacters_WhenRequestFails_ReturnsNil() {
         // Given
         let error = MockError()
         let sut = CharactersViewModel(networkFetching: NetworkFetchingStub(returning: .failure(error)))
