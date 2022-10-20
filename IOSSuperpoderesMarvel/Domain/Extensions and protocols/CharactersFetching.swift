@@ -8,6 +8,9 @@
 import Combine
 
 protocol CharactersFetching {
-
+    
+    /// Fetches characters.
+    /// - Parameter filter: A filter to select certain type of characters.
+    /// - Returns: A publisher to fetch characters.
     func fetchCharacters(filter: [Parameter]?) -> AnyPublisher<CharactersDataWrapper, Error>
 }

@@ -3,4 +3,86 @@
    uuid = "2A1DC74C-F6E7-4E5F-A609-EAE7B24583D3"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C356B9F7-DF4D-4C6C-A70E-0887957DE44E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IOSSuperpoderesMarvelTests/UI/ViewModels/CharactersViewModelTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "CharactersViewModelTests"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2C80A421-21F2-412B-B310-723E11186361"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IOSSuperpoderesMarvel/UI/ViewModels/CharactersViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "getCharacters(filter:comp:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A6680E9C-E01D-4FB1-BD5E-C424892DB473"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IOSSuperpoderesMarvel/UI/ViewModels/CharactersViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "getCharacters(filter:comp:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A6680E9C-E01D-4FB1-BD5E-C424892DB473 - d3836757d4d807af"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (IOSSuperpoderesMarvel.CharactersDataWrapper) -&gt; () in IOSSuperpoderesMarvel.CharactersViewModel.getCharacters(filter: Swift.Optional&lt;Swift.Array&lt;IOSSuperpoderesMarvel.Parameter&gt;&gt;, comp: Swift.Optional&lt;(Swift.Optional&lt;IOSSuperpoderesMarvel.Character&gt;) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "IOSSuperpoderesMarvel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ismaelsabriperez/Desktop/IOSSuperpoderesMarvel/IOSSuperpoderesMarvel/UI/ViewModels/CharactersViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "504">
+               </Location>
+               <Location
+                  uuid = "A6680E9C-E01D-4FB1-BD5E-C424892DB473 - 34cd8a9f16fca3cb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (IOSSuperpoderesMarvel.CharacterViewModel, IOSSuperpoderesMarvel.CharacterViewModel) -&gt; Swift.Bool in closure #2 (IOSSuperpoderesMarvel.CharactersDataWrapper) -&gt; () in IOSSuperpoderesMarvel.CharactersViewModel.getCharacters(filter: Swift.Optional&lt;Swift.Array&lt;IOSSuperpoderesMarvel.Parameter&gt;&gt;, comp: Swift.Optional&lt;(Swift.Optional&lt;IOSSuperpoderesMarvel.Character&gt;) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "IOSSuperpoderesMarvel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ismaelsabriperez/Desktop/IOSSuperpoderesMarvel/IOSSuperpoderesMarvel/UI/ViewModels/CharactersViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -40,6 +40,7 @@ final class CharactersViewModel: ObservableObject{
     ///
     /// This function cancells all prexistent suscriptors to avoid populating the suscriptors array unnecessarily.
     /// - Parameter filter: The filter of the request with nil default value.
+    /// - Parameter comp: Completion used to make the function testable
     func getCharacters(filter: [Parameter]? = nil, comp: ((Character?) -> ())? = nil) {
         
         status = .loading
@@ -65,7 +66,7 @@ final class CharactersViewModel: ObservableObject{
                 characterViewModels = characterViewModels.filter { $0.character.thumbnail.path != "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available/landscape_xlarge.jpg" }
                 // Avoid duplicates
                 characterViewModels = characterViewModels.filter { characterViewModels.contains($0) }
-                self.characters = characterViewModels
+                self.characters = characterViewModels.sorted(by: { $0.character.name < $1.character.name })
                 if let comp { comp(characterViewModels[0].character)} // To make it testable
             }
             .store(in: &suscriptors)
@@ -73,18 +74,22 @@ final class CharactersViewModel: ObservableObject{
 
     /// Update the characters array depending on the `searchText` parameter.
     /// - Parameter searchText: The text that will filter the request to get the characters from the API.
-    func onChangeSearchText(searchText: String) {
-        if !searchText.isEmpty { getCharacters(filter: [Parameter(parameterName: .nameStartsWith, value: searchText)])}
-        characters = characters?.sorted(by: { $0.character.name < $1.character.name })
+    /// - Parameter comp: Completion used to make the function testable
+    func onChangeSearchText(searchText: String, comp: ((Character?) -> ())? = nil) {
+        if !searchText.isEmpty { getCharacters(filter: [Parameter(parameterName: .nameStartsWith, value: searchText)], comp: { character in
+            if let comp {comp(character)}
+        })}
         if searchText.isEmpty { characters = [] }
     }
 }
 
 extension CharactersViewModel: CharactersFetching {
     
-    
+    /// Creates a publisher to fetch characters from the Marvel API
+    /// - Parameter filter: The filter of the request with nil default value.
+    /// - Returns: A publisher to fetch characters from the Marvel API
     func fetchCharacters(filter: [Parameter]?) -> AnyPublisher<CharactersDataWrapper, Error> {
-        // Get the request for characters depending on if it will be filtered or return all characters
+        // Get the request for characters
         let urlRequest = NetworkHelper.getSessionCharacters(filter: filter)
         return networkFetching.load(urlRequest!)
             .decode(type: CharactersDataWrapper.self, decoder: JSONDecoder())

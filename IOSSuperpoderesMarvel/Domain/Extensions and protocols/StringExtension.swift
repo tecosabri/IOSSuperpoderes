@@ -10,7 +10,6 @@ import CryptoKit
 
 extension String {
     
-    
     /// The MD5 code of the string.
     var MD5: String {
         let computed = Insecure.MD5.hash(data: self.data(using: .utf8)!)
