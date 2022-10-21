@@ -20,25 +20,20 @@ struct SplashView: View {
                 .scaledToFit()
                 .opacity(changeOpacity ? 1 : 0)
                 .onAppear() {
-                    withAnimation(.linear(duration: 2)) {
+                    withAnimation(.easeIn(duration: 2)) {
                         changeOpacity.toggle()
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         rootViewModel.status = .loaded
                     }
                 }
+                .id(0)
         }
     }
 }
 
-struct SplashView_Previews: PreviewProvider {
-    static var previews: some View {
-        SplashView()
-    }
-}
-
-extension AnyTransition {
-    static func opacityAndScale() -> AnyTransition {
-        AnyTransition.opacity.combined(with: .scale)
-    }
-}
+//struct SplashView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SplashView()
+//    }
+//}

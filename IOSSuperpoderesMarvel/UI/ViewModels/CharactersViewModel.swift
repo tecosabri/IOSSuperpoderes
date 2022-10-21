@@ -69,7 +69,7 @@ final class CharactersViewModel: ObservableObject{
                 // Avoid duplicates
                 characterViewModels = characterViewModels.filter { characterViewModels.contains($0) }
                 self.characters = characterViewModels.sorted(by: { $0.character.name < $1.character.name })
-                if let comp { comp(characterViewModels[0].character)} // To make it testable
+                if let comp, !characterViewModels.isEmpty { comp(characterViewModels[0].character)} // To make it testable
             }
             .store(in: &suscriptors)
     }

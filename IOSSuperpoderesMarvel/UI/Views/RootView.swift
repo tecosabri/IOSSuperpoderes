@@ -15,15 +15,18 @@ struct RootView: View {
         switch rootViewModel.status {
         case .none:
             SplashView()
+                .id("SplashView")
+                
         default:
             CharactersView(charactersViewModel: CharactersViewModel())
+                .id("CharactersView")
         }
     }
 }
 
-struct RootView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView()
-            .environmentObject(RootViewModel())
-    }
-}
+//struct RootView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RootView()
+//            .environmentObject(RootViewModel())
+//    }
+//}

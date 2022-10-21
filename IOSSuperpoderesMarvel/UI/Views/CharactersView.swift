@@ -11,9 +11,8 @@ struct CharactersView: View {
     
     @ObservedObject var charactersViewModel: CharactersViewModel
     
-    @State private var searchBarText: String = ""
-    @State private var isEmptyList: Bool = true
-
+    @State var searchBarText: String = ""
+    @State var isEmptyList: Bool = true
     private var characters: [CharacterViewModel]? {
         charactersViewModel.characters
     }
@@ -61,9 +60,9 @@ struct CharactersView: View {
     
 }
 
-struct CharactersView_Previews: PreviewProvider {
-    static var previews: some View {
-        CharactersView(charactersViewModel: CharactersViewModel(withUITesting: true))
-            .environment(\.locale, .init(identifier: "en"))
-    }
-}
+//struct CharactersView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CharactersView(charactersViewModel: CharactersViewModel(withUITesting: true))
+//            .environment(\.locale, .init(identifier: "en"))
+//    }
+//}
