@@ -46,7 +46,8 @@ struct SerieDetailView: View {
                 ZStack {
                     Rectangle()
                         .fill(.white)
-                        .border(.gray, width: 4)
+                        .border(.gray, width: 1)
+                        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
                         .scaledToFit()
                         .opacity(1)
                     Image(systemName: "photo")
